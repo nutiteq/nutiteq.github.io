@@ -64,7 +64,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #CCC;
   margin: 1em 0;
   padding: 0; }
 
@@ -101,7 +101,7 @@ small {
 
 blockquote {
   background-color: #EEE;
-  border: 1px solid #dddddd;
+  border: 1px solid #DDD;
   margin: 10px 0;
   padding: 10px 30px;
   border-radius: 3px; }
@@ -268,7 +268,7 @@ a {
 /* Input focus styles */
 input:focus {
   outline: 0;
-  border: 1px solid #0091bd; }
+  border: 1px solid #0091BD; }
 
 /* Gets rid of blue glow on field focus, adds border color instead */
 .master-wrapper {
@@ -326,7 +326,8 @@ input:focus {
     background: #00a578; }
 
 .content {
-  margin-bottom: 96px; }
+  margin-bottom: 96px;
+  overflow: hidden; }
 
 .demo-phone {
   height: 100%;
@@ -334,6 +335,7 @@ input:focus {
 
 .content-area {
   overflow: hidden;
+  clear: left;
   padding: 60px 96px;
   background: white; }
   .content-area .demo-phone {
@@ -369,6 +371,30 @@ input:focus {
         width: 5px;
         height: 5px;
         background: #ff7a48; }
+
+.content-alternative {
+  background: #F0F0F0;
+  padding: 60px 96px; }
+  .content-alternative .demo-phone {
+    float: right;
+    position: relative;
+    width: 834px;
+    height: 449px;
+    margin: -120px -417px 78px 48px;
+    z-index: 1; }
+  .content-alternative h3 {
+    color: #ff7a48;
+    font-size: 24px;
+    margin: 0 0 24px; }
+  .content-alternative .article-column {
+    float: left;
+    width: 300px; }
+  .content-alternative .row {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px; }
+    .content-alternative .row .article-column:first-child {
+      margin-right: 128px; }
 
 .terms {
   color: gray;
