@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Gi5f931xaRIzqhwKWogCP0tFHCOdwK95Q8AIYf1+DRzqn9VIfSI0qXXzmZGFxZflIJaBFvo7YH0mAdAjikHG7Q==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li ><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Release notes</h1>
+
+<p>27.07.2015</p>
+
+<p>Version: 3.2.0 RC0</p>
+
+<p>GIT commit: 56962750201c5dfa7c6765e7ea5ce75fdbc2b8dc</p>
+
+<h2>New features</h2>
+
+<h3>In all versions</h3>
+
+<ul>
+<li>Automatic point/marker clustering using ClusteredVectorLayer</li>
+<li>Multigeometry support. Geometry package contains now MultiGeometry, MultiPoint, etc classes.  A GeometryCollection vector element must be used together with these new geometry types.</li>
+<li>GeoJSON parser and generator. Only files that contain geometry objects are supported, features  are not supported as there is not direct mapping to SDK objects.</li>
+<li>Implemented basic CartoCSS style parsing. Only style attributes (like line-width, marker-size, etc) are supported, full CartoCSS support with selectors is planned at later stage.</li>
+</ul>
+
+<h3>In GIS Extension (Enterprise version)</h3>
+
+<ul>
+<li>Custom projections are now supported when using GDAL/OGR layers</li>
+<li>Vector editing support using EditableVectorLayer class</li>
+<li>Implemented WKB/WKT reading and writing </li>
+<li>More complete support for OGR: layers and layer fields can be created and deleted. Previously only modifying was supported.</li>
+</ul>
+
+<h2>Changes, minor updates</h2>
+
+<ul>
+<li>Added additional constructor to NutiteqOnlineVectorTileLayer that takes tile source id as a parameter</li>
+<li>Added getDataExtent method to LocalVectorDataSource</li>
+<li>Added getDataExtent method to MBTilesTileDataSource</li>
+<li>Added getDataExtent method to BitmapOverlayRasterTileDataSource</li>
+<li>Implemented getOpacity/setOpacity methods for RasterTileLayer</li>
+<li>Added getLayer method to VectorElementClickInfo class</li>
+<li>Added getDataSource method to NMLModelLODTreeLayer</li>
+<li>Added special error code to PackageErrorType: PACKAGE<em>ERROR</em>TYPE<em>NO</em>OFFLINE_PLAN, used when license does not allow using Nutiteq offline package service</li>
+<li>Added support for PNGs with explicit SRS info in GDALRasterTileDataSource (Enterprise edition)</li>
+<li>Tile preloading algorithm is changed, new algorithm should give more predictable results with less tile flickering for both vector and raster tiles</li>
+<li>Tile preloading is better integrated now with vector tile renderer, resulting in better performance and less tile fading effects</li>
+<li>Implemented better view envelope calculation, resulting in better performance in some VectorDataSource implementations</li>
+<li>Added 2 static methods to BitmapUtils class: loadBitmapFromAssets and loadBitmapFromFile</li>
+<li>Relaxed Android OpenGL renderer requirements for older lower end devices, for better compatibility with very old Android devices</li>
+<li>MBVectorTileDecoder class now supports non-gzipped vector tiles and is compatible with MapZen tiles now</li>
+</ul>
+
+<h2>API changes</h2>
+
+<ul>
+<li>Bitmap class constructor with asset name argument is deprecated. Instead, BitmapUtils.loadBitmapFromAssets  should be used.</li>
+<li>Bitmap class constructor that takes compressed byte vector as an argument is deprecated. Instead,  Bitmap.createFromCompressed method (static) should be used.</li>
+<li>LocalSpatialIndexType enum values are changed to conform with SDKs naming conventions. Old names  are available as deprecated but will be removed in future versions.</li>
+<li>MapTileQuadTreeNode class is removed from API. This is an internal SDK class that has very limited public use.</li>
+<li>The following methods that were deprecated in Android SDK 3.1 are now removed  (NOTE that similar methods with non-capitalized names are available):
+Log.SetShow*, AssetUtils.LoadBytes, BitmapUtils.CreateBitmapFromAndroidBitmap,
+BalloonPopupStyleBuilder.set[Left|Right]Bitmap(com.android.Graphics.Bitmap)</li>
+<li>The following methods that were deprecated in iOS SDK 3.1 are now removed  (NOTE that similar methods with non-capitalized names are available):
+Log.SetShow*, AssetUtils.LoadBytes, AssetUtils.Calculate[Resource|Writable]Path,
+BitmapUtils.CreateBitmapFromUIImage</li>
+</ul>
+
+<h2>Fixes</h2>
+
+<ul>
+<li>Fixed object ownership issues in listener callbacks, that could lead to native crashes or data corruption when callback argument reference was stored in member variable</li>
+<li>Fixed issues with object lifecycle management causing native crashes or data corruption in rare cases</li>
+<li>Fixed memory leaks with vector tile layers and NML layers, memory was not freed when layers were removed</li>
+<li>Fixed rare threading dead-locks when SDK methods were used from listener callbacks</li>
+<li>Fixed memory leaks in iOS SDK when listener objects were queried</li>
+<li>Fixed type wrapping issues with user derived classes Popup classes and getter-methods</li>
+<li>Fixed memory leak in Android/Xamarin.Android SDK with internal RedrawRequestListener class, resulting activity leaking when closed</li>
+<li>Fixed vector tile line antialiasing on low/very high DPI screens and with some custom display configurations</li>
+<li>Fixed rendering of non-vector-tile patterned lines</li>
+<li>Fixed issues with vector elements offseting when crossing 180th meridian, sometimes resulting in elements being shifted</li>
+<li>Fixed flickering with vector tile offsetting when crossing 180th meridian</li>
+<li>Fixed rendering of lines containing &gt; 64k vertices, such lines were ignored previously</li>
+<li>Fixed TileDataSource.getProjection returing wrong results in iOS SDK</li>
+<li>Fixed issues with click handling in iOS Xamarin component when used in Xamarin.Forms</li>
+<li>Fixed issue when vector elements stored in LocalVectorDataSource with KdTree index were updated, but results were not displayed properly</li>
+<li>Fixed Bitmap.compressToInternal not working with non-power-of-two bitmaps</li>
+<li>Fixed MapBounds.contains(MapPos) returning wrong results with some argument values</li>
+<li>Fixed various internal locking-related issues causing deadlocks/ANRs in rare cases</li>
+<li>Fixed handling of open polygons. SDK used to explicitly add a vertex for open polygons, this is no longer the case, original vertex list is preserved.</li>
+<li>Fixed issue with overlapping billboards that were not properly synchronized when updated</li>
+</ul>
+
+<h2>Feedback</h2>
+
+<p>Please email <a href="mailto:support@nutiteq.com">support@nutiteq.com</a></p>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="W0+Dk0Og2lYpZbkdoinq0HfhukHWOR1qnAGr1aCbVKmr/gksQ/OH7W88PIZ9ZH8KHDIndLHC0m75wHOX16SfWA==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Nutiteq Maps SDK and Maps Service FAQ</h1>
+
+<h2>Billing</h2>
+
+<h3>How map views are counted?</h3>
+
+<p>Map view is used for Nutiteq Maps online map service. Map View is technically counted as 15 map tile (which is part of the map) downloads. Exact number of map tiles per map view depends on screen size and your application map view size (typical phone full screen view has about 9 map pieces, tablet can have 2 times more), and what user does - small panning creates about 3 new tile downloads, zoom in/out full 9 downloads. So we measure server consumption. </p>
+
+<h3>How downloads are counted?</h3>
+
+<p>Map download metric is for offline packages from Nutiteq Maps service. If you want to use Nutiteq offline maps feature, then application has to download map package into each end-users’s device, using PackageManager API which is part of Nutiteq SDK. We count all new downloads for this application, and later update of same package into same application and device will be for free. So if your application uses one offline map of one country, then number of map package downloads could be very similar number to number of application installs.</p>
+
+<p>With Nutiteq Maps Enterprise license you can also pre-package offline map packages with app, as application asset. </p>
+
+<h3>What happens if it goes over the limit?</h3>
+
+<p>Free Lite package has hard limit - after reaching the limit no maps are provided for the app. Other subscription packages are flexible - if you use more than in package then you pay accordingly extra, service is not interrupted. Same thing for offline package limits.</p>
+
+<h3>Is the Nutiteq Maps SDK license included in Maps service fee?</h3>
+
+<p>Yes. &quot;Nutiteq Maps&quot; license type is included for free, see <a href="http://www.nutiteq.com/license/">license terms</a>. Key terms for this license:</p>
+
+<ul>
+<li>Nutiteq branding must be included, cannot be removed or hidden</li>
+<li>It is for public apps on Play Store. Cannot be used for corporate and private apps, or apps under password.</li>
+</ul>
+
+<h2>Features and development</h2>
+
+<h3>How can I use my own map data?</h3>
+
+<p>To use your own map data Nutiteq Maps SDK Enteprise license is needed. Please contact our sales (<a href="mailto:sales@nutiteq.com">sales@nutiteq.com</a>) for more details. </p>
+
+<h3>Are 3D maps included?</h3>
+
+<p>Nutiteq Maps SDK allows for everyone, out of the box:</p>
+
+<ul>
+<li>Tilted and rotated, so-called 2.5D map view </li>
+<li>Adding 3D polygons to map. </li>
+<li>Base Map layout allows to render buildings in 3D with height, if height data is defined in OpenStreetMap data for particular building.</li>
+</ul>
+
+<p>For more 3D you would need:</p>
+
+<ul>
+<li><strong>Nutiteq Maps 3D converter</strong> to convert own KMZ 3D cities and Collada (DAE) 3D models to Nutiteq SDK format (NML). Ask from sales for licensing offer.</li>
+<li><strong>3D city map content</strong> to cover cities with full city 3D. We can provide you Nutiteq SDK compatible 3D city data coverage of hundreds of cities, licensed from TomTom. This has per-device additional license fee, ask from our sales for details. You can also use any other provider, and use Nutiteq converter to process it.</li>
+</ul>
+
+<h3>What about routing and geocoding?</h3>
+
+<p>We have offline route calculation (from A to B with instructions) and display in our roadmap. Also basic geocoding and reverse geocoding is in our 2015 plans. However, especially geocoding is very local-specific task and online services will probably always give better localized results. So our offline solution will work for about 80% of cases.</p>
+
+<h3>Do you do voice navigation?</h3>
+
+<p>Not really, Nutiteq will focus on map visualisation. We leave voice navigation for navigation software providers. Say them &quot;Hello!&quot; from Nutiteq :-) </p>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

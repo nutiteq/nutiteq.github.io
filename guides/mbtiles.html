@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="JHg+Qev1+p3UjMZs1wKIPqdfkXxluDi4gh9KitGoK3rUybT+66anJpLVQ/cITx3kzIwMSQJD97zn3pLIppfgiw==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>MBTiles map data</h1>
+
+<p><a href="http://mapbox.com/developers/mbtiles/">MBTiles</a> support is included in Nutiteq SDK. MBTiles uses SQLite database format, so you have just one file to be downloaded and managed. Following are some tools to create MBTiles packages:</p>
+
+<h2>a) Raster maps</h2>
+
+<ul>
+<li><a href="http://www.maptiler.com/">MapTiler</a> is nice utility to create MBTiles from raster geo files (GeoTIFF, JPG, ECW etc), it is well worth small price to support the developer</li>
+<li><a href="http://mapbox.com/tilemill/">TileMill</a> is open source generator of very nice map packages, if source is vector geo file, e.g. Shapefile or PosgGIS geo data.</li>
+<li><a href="http://mobac.sourceforge.net">MOBAC</a> - download from variety of free sources (e.g. Bing, OpenStreetMap etc), can even load from WMS with added configuration</li>
+<li><a href="https://github.com/mapbox/mbutil">MBUtil</a> enables to create mbtiles from/to TMS-style tile folders, created with e.g. GDAL utility</li>
+<li><a href="https://geopbs.codeplex.com/">Portable Basemap Server</a> - free utility for Windows, loads data not only from various commercial servers and custom sources, but also from ESRI formats. Works mainly as WMTS server, but can create MBTiles as extra feature.</li>
+</ul>
+
+<h2>b) Vector maps</h2>
+
+<ul>
+<li>Nutiteq SDK bundled <a href="offline-maps.html">Package Manager API</a> downloads country-wide or bounding box based map packages with <strong>OpenStreetMap data</strong>. These files are not directly visible, as Package Manager downlods the files, you only use the API.</li>
+<li>If you need to create vector map files <strong>from different sources or your own data</strong> (e.g. Shapefiles), then please contact Nutiteq (<a href="mailto:support@nutiteq.com">support@nutiteq.com</a>) - we can provide you converter toolchain, and do free demo conversions.</li>
+</ul>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

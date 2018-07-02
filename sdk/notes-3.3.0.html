@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="OYvowtaqGJXmyWwnYgQfJoaq4nJm3tLrmoc4vitoBsbJOmJ91vlFLqCQ6by9SYr87Xl/RwElHe//RuD8XFfNNw==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li ><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Release notes</h1>
+
+<p>25.05.2016</p>
+
+<p>Version: 3.3.0</p>
+
+<p>GIT commit: 202b36391695d367cd3cb9622e0940ce5932a033</p>
+
+<h2>Changes/new features</h2>
+
+<ul>
+<li>SDK has now support for <strong>routing</strong>. Both online and offline routing (based on routing packages, similar to offline map packages) is supported.</li>
+<li>SDK now supports <strong>CartoCSS</strong> for styling base maps and vector tile overlay maps</li>
+<li>Implemented <strong>Torque tile</strong> support with CartoCSS styling for rendering large animated point sets </li>
+<li><strong>UTFGrid</strong> support is added for raster layers</li>
+<li>Native level <strong>HTTP network stack</strong> is now replaced with platform-specific HTTP implementations. This provides HTTPS support for all platforms, implements compression and may provide better performance.</li>
+<li>SDK now supports version 2.1 specification of Mapbox Vector Tiles</li>
+<li>Implemented preliminary support for MapZen vector tiles</li>
+<li>Added arm64 and x64 builds to Xamarin Android DLL</li>
+<li>Added { } tag support to Mapnik XML text expression parser, so arbitrary expressions may now be substituted in the texts</li>
+<li>Added .length, .uppercase, .lowercase and .capitalize operators to Mapnik XML expressions</li>
+<li>Made handling two-finger touch gestures more stable</li>
+</ul>
+
+<h2>API updates and changes</h2>
+
+<ul>
+<li>Added getSDKVersion method to BaseMapView class</li>
+<li>Most listener methods have now default &#39;empty&#39; implementations.
+Previously unimplemented methods gave runtime errors and were not properly identified during compilation</li>
+<li>Added new classes for routing: NutiteqOfflineRoutingService, NutiteqOnlineRoutingService, PackageManagerRoutingService, RoutingInstruction, RoutingRequest, RoutingResult, RoutingService</li>
+<li>Added UTFGridRasterTileLayer class for grid-based interaction with raster tiles</li>
+<li>Added CartoCSSStyleSet class for styling Torque and vector tile layers using CartoCSS</li>
+<li>Added TorqueTileLayer, TorqueTileDecoder classes for rendering animated point sets</li>
+<li>Added getLabelOrder/setLabelOrder methods to VectorTileLayer, vector tile labels can be placed on top of overlay geometry using this method</li>
+<li>Added getPackageType method to PackageInfo, this method can be used to detect offline package type (map or routing currently)</li>
+<li>Added getPackageManager method to PackageManagerTileDataSource</li>
+<li>Added getPackageStatus method with MapTile argument type to PackageTileMask, previous getPackageStatus with 3 arguments is deprecated</li>
+<li>Added getCartoCSSStyle/setCartoCSSStyle methods to MBVectorTileDecoder for styling vector tiles using CartoCSS</li>
+<li>Added getMaxMemorySize and getLODResolutionFactor methods to NMLModelLODTreeLayer</li>
+<li>Fixed typo in Options class method name: setClickTypeDetecton is now setClickTypeDetection</li>
+<li>Removed get2PowZoom method from ViewState</li>
+<li>Removed internal GLUtils class from public API</li>
+<li>Removed offsetPercent argument from ViewState.screenToWorldPlane method. The argument had no effect on the result.</li>
+<li>Removed deprecated NTMapViewController from iOS SDK</li>
+<li>Removed deprecated Bitmap class constructors</li>
+<li>Removed deprecated KDTREE<em>SPATIAL</em>INDEX, NULL<em>SPATIAL</em>INDEX enum values</li>
+<li>Xamarin API change: Made ClickTypeDetection property writable, removed setClickTypeDetecton</li>
+<li>Xamarin API change: removed getHTTPHeaders/setHTTPHeaders, added HTTPHeaders property to HTTPTileDataSource</li>
+<li>Xamarin API change: removed setMaxMemorySize/setLODResolutionFactor from NMLModelLODTreeLayer, added LODResolutionFactor, MaxMemorySize properties</li>
+<li>Xamarin API change: removed getBounds from Projection, added Bounds property</li>
+</ul>
+
+<h2>Fixes, internal changes</h2>
+
+<ul>
+<li>Additional vector tile decoding optimizations, complex tiles with complex styles are decoded up to several times faster</li>
+<li>Regex-ex matching support in CartoCSS</li>
+<li>Several minor compatibility fixes in vector tile decoder regarding expressions involving different value types</li>
+<li>Fixed RasterTileLayer and TileLoadListener interaction issue when layer was invisible or outside of visible zoom range</li>
+<li>Added Maps API tile support to TorqueVectorTileDecoder, previous version supported only internal SQL API</li>
+<li>SDK can automatically renew licenses via online service</li>
+<li>SDK now logs its build info, OS version info and device type when MapView is created. This info can be relevant when reporting issues.</li>
+<li>Fixed warning/messages when MapView was used inside IDE layout editor of Eclipse/Android Studio</li>
+<li>Fixed vector tile basemap labels/texts moving away from correct position when zoomed in multiple levels</li>
+<li>Fixed PackageManagerTileDataSource API wrapping issue</li>
+<li>Fixed potential crash with ClusteredVectorLayer when custom VectorElement instances were used for cluster elements</li>
+<li>Implemented various rendering performance optimizations for complex vector tiles</li>
+<li>Made vector tile decoding 30% faster on average (affects mostly offline tiles)</li>
+<li>Implemented better placement of repeated shields, texts and markers in vector tiles</li>
+<li>Changed rendering method of 3D buildings in vector tiles, new method provides much better performance on some devices (iPad 3)</li>
+<li>Implemented preliminary support for element-level comp-op and layer-level comp-op operations in vector styles.
+Currently only a subset of composite operations are supported (only those that have direct translation to OpenGL blending modes)</li>
+<li>Added preliminary support for layer level opacity in vector tile renderer</li>
+<li>Implemented &#39;fill-opacity&#39;, &#39;stroke&#39;, &#39;stroke-opacity&#39; attributes for MarkersSymbolizer</li>
+<li>Vector tile style errors are handled more gracefully, several error classes caused fatal exceptions previously</li>
+<li>Better rendering quality for built-in markers/arrows if MarkersSymbolizer is used in vector style</li>
+<li>Better logging of vector styling issues</li>
+<li>Changed internal SDK timers to use monotonic clock, this fixes potential issues with time saving related clock changes</li>
+<li>BitmapUtils::create* methods do not crash anymore when supplied with null bitmap arguments</li>
+<li>Data sources that use string based tags: added support for {z} tag, this has same effect as {zoom} tag</li>
+<li>Improved and fixed log messages for various NTMapView events on iOS</li>
+<li>Made Android AssetUtils work after registerLicense is called but MapView is not yet instantiated</li>
+<li>Fixed &#39;clicking on the sky&#39; issues - SDK now filters such events out as they tend to create erratic movements</li>
+<li>Fixed tile size underestimation in CompressedCacheTileDataSource, resulting in cache memory footprint exceeding cache capacity</li>
+<li>Fixed potential crashes in case of failed vector tile decoding</li>
+<li>Fixed MapPos point to line distance calculation</li>
+<li>Implemented &#39;null&#39; value support to CartoCSS parser</li>
+<li>Added expression support for &#39;text-name&#39;/&#39;shield-name&#39; parameters in CartoCSS</li>
+<li>Fixed expression support in Mapnik XML parser for TextSymbolizer/ShieldSymbolizer</li>
+<li>Fix renderer dead-lock issue with Xamarin/Android</li>
+</ul>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

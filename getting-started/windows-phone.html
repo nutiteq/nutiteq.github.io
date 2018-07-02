@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="jTJ0lW/mbj4NASwAdjzWjZ6Uu2qROB4fKsPqwkjaxi59g/4qb7UzhUtYqZupcUNX9UcmX/bD0RtPAjKAP+UN3w==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li class="m-active"><a href="../getting-started.1.html">Getting Started</a></li>
+      <li ><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Windows Phone get started</h1>
+
+<p>Nutiteq Maps SDK 3.1 supports also WP 8.1 apps. </p>
+
+<h2>Get Visual Studio extension package</h2>
+
+<p>Requirements:</p>
+
+<ul>
+<li>Windows 8.1</li>
+<li>MS Visual Studio 2013 Community edition, or better</li>
+<li>Windows Phone 8.1 SDK, should come with VS</li>
+<li>Visual Studio extension (VSIX) for Nutiteq Maps SDK component from <a href="../downloads.html">Nutiteq SDK Downloads</a>. Download and just start the package to install it.</li>
+</ul>
+
+<h2>Register license key</h2>
+
+<p>Sign up in <a href="../index.html">developer.nutiteq.com</a> and add an application. Select <strong>Windows Phone</strong> as application type, and make sure you enter same application ID as you have in your <em>Package.appmanifest &gt; Packaging &gt; Package name</em>. For example, sample app ID is <strong>c882d38a-5c09-4994-87f0-89875cdee539</strong>. Finally you should get license code, which is a long string starting with <em>&quot;XTU...&quot;</em>. This is needed for your code.</p>
+
+<h2>Cross-platform apps</h2>
+
+<p>You can create one .Net project (solution) for Android, iOS, Windows Phone and share map-related code. These still need to be separate apps, as many app aspects (UI, file system etc) are platform-specific. From Nutiteq SDK point of view the API is almost the same and your code can be shared, except some specific API calls which need e.g. file system references or app resources. </p>
+
+<p>Almost all of the map API related code: adding layers and objects to map, handling interactions/clicks etc can be shared for iOS and Android!</p>
+
+<p>.Net sample project has two solutions: one for Windows Phone and another for Xamarin, and they share one project (hellomap-shared) with map-related code.</p>
+
+<h2>Creating WP app</h2>
+
+<p>1) Make sure you have Nutiteq VS extension installed, and your app project has Internet Capability as minimum. In <em>Solution Explorer References</em> section, add <em>Nutiteq Maps SDK for Windows Phone</em>. You should find it from Windows Phone 8.1 extensions. We don&#39;t have NuGet package yet, but it will come if you show us interest.</p>
+
+<p>2) <strong>Copy vector style file</strong> (<em>osmbright.zip</em>) to your project <em>Assets</em> folder. You can take it from samples. This is needed for vector basemap.</p>
+
+<p>3) <strong>Create MapView object, add a base layer</strong> </p>
+
+<p>You can create MapView object with code. Definition of base layer is enough for minimal map configuration.</p>
+
+<pre class="brush: csharp">
+using Nutiteq.Core;
+using Nutiteq.Graphics;
+using Nutiteq.DataSources;
+using Nutiteq.Projections;
+using Nutiteq.Layers;
+using Nutiteq.Styles;
+using Nutiteq.VectorElements;
+
+...
+
+protected async override void OnLaunched(LaunchActivatedEventArgs e)
+{
+    if (mapView == null)
+    {
+        // Register Nutiteq app license
+        var licenseOk = Nutiteq.Ui.MapView.RegisterLicense("YOUR_LICENSE_KEY");
+
+        // Create map view and initialize
+        mapView = new Nutiteq.Ui.MapView();
+
+        // Online vector base layer
+        var baseLayer = new NutiteqOnlineVectorTileLayer("osmbright.zip");
+
+        // Set online base layer.
+        // Note: assuming here that Map is an outlet added to the controller.
+        mapView.Layers.Add(baseLayer);
+        
+    }
+
+    // Place the page in the current window and ensure that it is active.
+    Windows.UI.Xaml.Window.Current.Content = mapView;
+    Windows.UI.Xaml.Window.Current.Activate();
+}
+
+private Nutiteq.Ui.MapView mapView; 
+
+...
+
+</pre>
+
+<h2>Add a marker</h2>
+
+<p>To create a map Marker to given coordinates add following after creating mapView.</p>
+
+<p>Note: You must have <em>Icon.png</em> in your Assets folder to set bitmap</p>
+
+<pre class="brush: csharp">
+// Create overlay layer for markers
+var proj = new EPSG3857();
+var dataSource = new LocalVectorDataSource(proj);
+var overlayLayer = new VectorLayer(dataSource);
+mapView.Layers.Add(overlayLayer);
+
+// create Marker style
+var markersStyleBuilder = new MarkerStyleBuilder();
+markersStyleBuilder.Size = 20;
+UnsignedCharVector iconBytes = AssetUtils.LoadBytes("Icon.png");
+var bitmap = new Bitmap(iconBytes, true);
+markersStyleBuilder.Bitmap = bitmap;
+
+// Marker for London
+var marker = new Marker(proj.FromWgs84(new MapPos(-0.8164, 51.2383)), markersStyleBuilder.BuildStyle());
+dataSource.Add(marker);
+
+</pre>
+
+<h2>Other map actions</h2>
+
+<p>See <a href="https://github.com/nutiteq/hellomap3d-dotnet/">hellomap3d-dotnet</a> sample project (solution: <em>hellomap-winphone.sln</em>) how to:</p>
+
+<ul>
+<li><strong>Control map view</strong> - set zoom, center, tilt etc</li>
+<li><strong>Listen events</strong> (MapListener.cs) of clicks to map and map objects</li>
+<li><strong>Add other objects</strong>: Lines, Polygons, Points, Balloons (callouts). You can even add 3D objects and use customized Balloons.</li>
+<li><strong>Download offline map packages</strong> for country or smaller region</li>
+<li>See <a href="../guides.1.html">Guides</a> pages with dotnet samples tab for other actions</li>
+</ul>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

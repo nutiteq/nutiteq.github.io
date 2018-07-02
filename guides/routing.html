@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="0ZYnmXS0SyXVd0b/lRaPxkXgDRWGywSMTDusvhbgu78hJ60mdOcWnpMuw2RKWxocLjOQIOEwy4gp+nT8Yd9wTg==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Routing - offline and online</h1>
+
+<p>Nutiteq SDK includes routing functionality starting from version 3.3.0. This includes both offline routing using special data packages stored on the device, and online routing using our online service.</p>
+
+<h2>Functionality</h2>
+
+<p><img src = "../images/route.png.html" alt="Offline routing with Nutiteq" align="right"></p>
+
+<p>Nutiteq SDK provides following routing features:</p>
+
+<ul>
+<li><strong>find fastest route</strong> from A to B</li>
+<li>find fastest route between X points, in given order</li>
+<li>get complete result <strong>route geometry</strong> to show it on map</li>
+<li>get <strong>instructions for actions</strong> (turn left/right, u-turn, leave roundabout etc)</li>
+<li>get <strong>instruction details</strong>: street name, turn angle, azimuth, distance and time for the next leg</li>
+<li>takes into account turn restrictions and one-way streets</li>
+<li><strong>fast calculation</strong>: in new devices about 200-300 ms is expected, even for long routes.</li>
+<li><strong>multi-country route</strong> calculation</li>
+</ul>
+
+<h3>Limitations</h3>
+
+<p>Initial public version is optimised for low memory usage and calculation speed (even for very large road networks by using <em>Contraction Hierarchy</em> representation and algorithms), but this creates also some limitations in flexibility:</p>
+
+<ul>
+<li>route profile is pre-calculated in server side, and hardcoded in the data. For different profiles  (e.g. car, walking) you should download different map data packages if offline routing is needed.</li>
+<li> no shortest/fastest choice in calculation, this is precoded in the routing data</li>
+<li> no alternative routes</li>
+<li> no live data in routing - traffic, temporarily closed roads etc</li>
+</ul>
+
+<p>Note that initial routing feature does not include live navigation features, like following of GPS location, initiating automatic recalculations or giving voice instructions. This can be built on top of routing by your application.</p>
+
+<h3>Offline route packages</h3>
+
+<p>Offline routing is based on special routing packages, similar to offline map packages. Nutiteq has prepared <strong>world-wide offline route packages</strong> and corresponding online service for most common profiles: <strong>osm.car</strong> and <strong>osm.foot</strong> using OpenStreetMap as map data source. Other profiles will be added based on demand. List of country packages is the same as for offline maps, see <a href="https://developer.nutiteq.com/guides/packages">https://developer.nutiteq.com/guides/packages</a> for the full list.</p>
+
+<p>Download size of the offline routing package is about 10-40% of corresponding offline map package. Car profile packages are considerably smaller than walking packages, for example.</p>
+
+<p>For commercial / enterprise users we can also provide sets of offline routing packages using <strong>HERE.com map data</strong>. In many countries (especially outside Europe) this is cleaner, has more roads covered and provides higher quality results. In addition, HERE includes address data. Please contact Nutiteq if you consider using this commercial map data in your app.</p>
+
+<h2>Using routing in your app</h2>
+
+<h3>Ready-made sample code</h3>
+
+<p>For minimal working implementation see our <em>advanced map</em> app code samples on different platforms:</p>
+
+<ul>
+<li>iOS: <a href="https://github.com/nutiteq/hellomap3d-ios">https://github.com/nutiteq/hellomap3d-ios</a> : <a href="https://github.com/nutiteq/hellomap3d-ios/blob/master/advancedmap3/advancedmap3/OfflineRoutingController.mm">OfflineRoutingController.mm</a></li>
+<li>Android: <a href="https://github.com/nutiteq/hellomap3d-android">https://github.com/nutiteq/hellomap3d-android</a> : <a href="https://github.com/nutiteq/hellomap3d-android/blob/master/com.nutiteq.advancedmap3/src/com/nutiteq/advancedmap3/OfflineRoutingActivity.java">OfflineRoutingActivity.java</a></li>
+<li>Xamarin (Android): <a href="https://github.com/nutiteq/hellomap3d-dotnet">https://github.com/nutiteq/hellomap3d-dotnet</a> : <a href="https://github.com/nutiteq/hellomap3d-dotnet/blob/master/hellomap-android/OfflineRouting.cs">OfflineRouting.cs</a></li>
+</ul>
+
+<p>These samples work as following:</p>
+
+<ol>
+<li>App downloads automatically several pre-coded offline route packages right after you start the sample. Estonia and Latvia are downloaded by default, but you can change the code easily to download any other country or state</li>
+<li>Long-click on map set route start point, second long-click sets end points. </li>
+<li>When end-point is set, then route is automatically calculated</li>
+<li>Route is shown as a line on map, instructions are shown as markers.</li>
+</ol>
+
+<p>Sample has some simplifications to keep code simpler:</p>
+
+<ul>
+<li>Background map is still on-line </li>
+<li>Online routing is used before download is not finished. So for offline routing wait for a minute, depending on your network speed. Download progress is not indicated in UI.</li>
+<li>Make sure that route start and end points are within downloaded package areas, otherwise routing error occurs. Also, if the shortest route passes another country/area that is not downloaded, routing fails. </li>
+<li>if start and stop are in different countries/packages, then also in-between country packages must be downloaded to find multi-country route.</li>
+</ul>
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/8u-DpOAt0zQ" frameborder="0" allowfullscreen></iframe>
+
+<h2>Step-by-step instructions</h2>
+
+<p>Following code samples demonstrate essential routing code. Linking this to UI and map graphics is up to your app, you can see our samples about one way how to do it. You may want to have more advanced logic, e.g. show instructions as textual list, what is not in our samples, customise UI etc.</p>
+
+<h3>Online routing</h3>
+
+<p>Online routing is quite simple: just create <em>NutiteqOnlineRoutingService</em> and call the <em>calculateRoute</em> request to calculate route. As processing the request may take some time (online query), using a background thread/task is a good idea.</p>
+
+<h4>1. Create service</h4>
+
+<div id="tabs4">
+  <ul>
+    <li><a href="routing.html#i4"><span>iOS ObjC</span></a></li>
+    <li><a href="routing.html#a4"><span>Android Java</span></a></li>
+    <li><a href="routing.html#n4"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i4">
+<pre class="brush: objc">
+ // create  online routing service 
+ _onlineRoutingService = [[NTNutiteqOnlineRoutingService alloc] initWithSource:@"nutiteq.osm.car"];
+</pre>
+</div>
+
+<div id="a4">
+<pre class="brush: java">
+ // create  online routing service 
+ onlineRoutingService = new NutiteqOnlineRoutingService("nutiteq.osm.car");
+</pre>
+</div>
+
+<div id="n4">
+<pre class="brush: csharp">
+ // create  online routing service
+ onlineRoutingService = new NutiteqOnlineRoutingService("nutiteq.osm.car");
+</pre>
+</div>
+
+<p></div></p>
+
+<h4>2. Calculate route</h4>
+
+<p>Note that the <strong>calculation request is expensive</strong>. So use of separate thread is strongly suggested, as in the sample below.  Otherwise the main thread could be blocked for up to couple of seconds on slow devices.</p>
+
+<p>See our full sample to see how to show the instructions on the map, as Line and Markers.</p>
+
+<div id="tabs5">
+  <ul>
+    <li><a href="routing.html#i5"><span>iOS ObjC</span></a></li>
+    <li><a href="routing.html#a5"><span>Android Java</span></a></li>
+    <li><a href="routing.html#n5"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i5">
+<pre class="brush: objc">
+
+     // set route start end end points
+     NTMapPosVector* poses = [[NTMapPosVector alloc] init];
+     [poses add:startPos];
+     [poses add:stopPos];
+    
+    NTRoutingRequest* request = [[NTRoutingRequest alloc] initWithProjection:[[self.mapView getOptions] getBaseProjection] points:poses];
+
+    // this calculation should be in background thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NTRoutingResult* route = [_onlineRoutingService calculateRoute:request];
+
+       // process results in main thread, so it can update UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (route == nil){
+                NSLog(@"route error");
+                return;
+            }
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"HH:mm:ss"];
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+            
+            NSString* routeDesc = [NSString stringWithFormat:@"Route: %0.3f m, travel %@. Calculation took %0.3f s", [route getTotalDistance]/1000.0,
+                                   [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:[route getTotalTime]]],
+                                   duration];
+            
+            NSLog(@"%@",routeDesc);
+            
+            // get instructions
+            for(int i=0; i &lt; [[route getInstructions] size];i++){
+                NTRoutingInstruction *instruction =[[route getInstructions] get:i];
+                NSLog(@"%@",[instruction description]);
+
+            }
+        });
+    });
+
+</pre>
+</div>
+
+<div id="a5">
+<pre class="brush: java">
+
+    AsyncTask&lt;Void, Void, RoutingResult&gt; task = new AsyncTask&lt;Void, Void, RoutingResult&gt;() {
+
+        protected RoutingResult doInBackground(Void... v) {
+                MapPosVector poses = new MapPosVector();
+                poses.add(startPos);
+                poses.add(stopPos);
+                RoutingRequest request = new RoutingRequest(mapView.getOptions().getBaseProjection(), poses);
+                RoutingResult result = onlineRoutingService.calculateRoute(request);
+
+                return result;
+            }
+
+            protected void onPostExecute(RoutingResult result) {
+                if (result == null) {
+                    Log.e(Const.LOG_TAG,"routing error");
+                    return;
+                }
+
+                String routeText = "The route is " + (int) (result.getTotalDistance() / 100) / 10f
+                        + "km (" + result.getTotalTime()
+                        + " s)";
+                Log.i(Const.LOG_TAG,routeText);
+
+                // get instruction details
+                RoutingInstructionVector instructions = result.getInstructions();
+                boolean first = true;
+                for (int i = 0; i &lt; instructions.size(); i++) {
+                    RoutingInstruction instruction = instructions.get(i);
+                        Log.d(Const.LOG_TAG, instruction.toString());
+                     }
+
+                }
+            }
+        };
+
+        task.execute();
+
+
+</pre>
+</div>
+
+<div id="n5">
+<pre class="brush: csharp">
+
+    Task.Run (() => {
+        MapPosVector poses = new MapPosVector ();
+        poses.Add (startPos);
+        poses.Add (stopPos);
+        RoutingRequest request = new RoutingRequest (baseProjection, poses);
+        RoutingResult result = onlineRoutingService.CalculateRoute (request);
+                
+        // get total route results
+        String routeText = "The route is " + (int)(result.TotalDistance / 100) / 10f
+                      + "km (" + result.TotalTime
+                      + " sec) ";
+        Log.Debug(routeText);   
+                
+        // get instructions, just log them
+        RoutingInstructionVector instructions = result.Instructions;
+        for (int i = 0; i &lt; instructions.Count; i++) {
+            RoutingInstruction instruction = instructions [i];
+            Log.Debug(instruction.toString());
+
+        }
+    });
+
+</pre>
+</div>
+
+<p></div></p>
+
+<h3>Offline routing</h3>
+
+<h4>1. Create NutiteqPackageManager to prepare download of routing packages</h4>
+
+<p>For offline routing you need to download routing packages, for this you use the same <em>PackageManager</em> what is used for <a href="offline-maps.html">offline map packages</a>. The download process and listener events are the same, so see offline map package manual for some details. However, as it uses different packages (specified by <em>source</em>), you must create two instances if you need both offline map packages and routing packages.</p>
+
+<p>First you need to define folder where to keep the files (different from your map packages), and use <em>PackageManagerRoutingService</em> with the PackageManager to calculate the routes.</p>
+
+<div id="tabs1">
+  <ul>
+    <li><a href="routing.html#i1"><span>iOS ObjC</span></a></li>
+    <li><a href="routing.html#a1"><span>Android Java</span></a></li>
+    <li><a href="routing.html#n1"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i1">
+<pre class="brush: objc">
+
+   // define PackageManger to download offline routing packages
+    // Create folder for package manager. Package manager needs persistent writable folder.
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask,YES);
+    NSString* appSupportDir = [paths objectAtIndex: 0];
+    NSString* packagesDir = [appSupportDir stringByAppendingString:@"/packages"];
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:packagesDir withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    NTNutiteqPackageManager* packageManager = [[NTNutiteqPackageManager alloc] initWithSource:@"routing:nutiteq.osm.car" dataFolder:packagesDir];
+
+</pre>
+</div>
+
+<div id="a1">
+<pre class="brush: java">
+
+    // create PackageManager instance for dealing with offline packages
+        File packageFolder = new File(getApplicationContext().getExternalFilesDir(null), "routingpackages");
+        if (!(packageFolder.mkdirs() || packageFolder.isDirectory())) {
+            Log.e(Const.LOG_TAG, "Could not create package folder!");
+        }
+        packageManager = new NutiteqPackageManager("routing:nutiteq.osm.car", packageFolder.getAbsolutePath());
+        
+</pre>
+</div>
+
+<div id="n1">
+<pre class="brush: csharp">
+
+    // create PackageManager instance for dealing with offline packages
+    var packageFolder = new File (GetExternalFilesDir(null), "routingpackages");
+    if (!(packageFolder.Mkdirs() || packageFolder.IsDirectory)) {
+        Log.Fatal("Could not create package folder!");
+    }
+
+    packageManager = new NutiteqPackageManager("routing:nutiteq.osm.car", packageFolder.AbsolutePath);
+</pre>
+</div>
+
+<p></div></p>
+
+<h4>2. Use PackageManagerListener to get DownloadManager events</h4>
+
+<p>Routing package download cannot be started immediately - SDK needs to get latest definition of packages from Nutiteq online service. Once this list is received, PackageManagerListener&#39;s .onPackageListUpdated() is called. This similar to offline map packages - see <a href="../images/pm_flow.png.html">call flow diagram</a></p>
+
+<p>For this you need to write your own PackageManagerListener, and start offline download in the <em>onPackageListUpdated</em> method, where it is sure that package metadata is already downloaded and known.</p>
+
+<div id="tabs2">
+  <ul>
+    <li><a href="routing.html#i2"><span>iOS ObjC</span></a></li>
+    <li><a href="routing.html#a2"><span>Android Java</span></a></li>
+    <li><a href="routing.html#n2"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i2">
+<pre class="brush: objc">
+
+    @implementation RoutePackageManagerListener
+
+    - (void)onPackageListUpdated
+    {
+        NSLog(@"onPackageListUpdated");
+        // We have packages all country/regions
+        // see list of available ID-s: https://developer.nutiteq.com/guides/packages
+        // just append -routing to the ID-s
+        // You can download several packages, and route is found through all of them
+        
+         [_packageManager startPackageDownload: @"EE-routing"];
+         [_packageManager startPackageDownload: @"LV-routing"];
+    }
+
+    - (void)onPackageListFailed
+    {
+        NSLog(@"onPackageListFailed");
+    }
+
+    - (void)onPackageUpdated:(NSString*)packageId version:(int)version
+    {
+    }
+
+    - (void)onPackageCancelled:(NSString*)packageId version:(int)version
+    {
+    }
+
+    - (void)onPackageFailed:(NSString*)packageId version:(int)version errorType:(enum NTPackageErrorType)errorType
+    {
+        NSLog(@"onPackageFailed");
+    }
+
+    - (void)onPackageStatusChanged:(NSString*)packageId version:(int)version status:(NTPackageStatus*)status
+    {
+           // here you can get progress of download
+        NSLog(@"onPackageStatusChanged progress: %f", [status getProgress]);
+    }
+
+    @end
+
+</pre>
+</div>
+
+<div id="a2">
+<pre class="brush: java">
+
+    /**
+     * Minimal for package manager events. Contains some empty methods.
+     */
+    class RoutePackageManagerListener extends PackageManagerListener {
+        @Override
+        public void onPackageListUpdated() {
+          Log.d(Const.LOG_TAG, "Package list updated");
+          // Start download of package of Estonia
+          // see list of available ID-s: https://developer.nutiteq.com/guides/packages
+          // just append -routing to the ID-s
+          // You can download several packages, and route is found through all of them
+              
+          packageManager.startPackageDownload("EE-routing");
+          packageManager.startPackageDownload("LV-routing");
+
+        }
+
+        @Override
+        public void onPackageListFailed() {
+            Log.e(Const.LOG_TAG, "Package list update failed");
+        }
+
+        @Override
+        public void onPackageStatusChanged(String id, int version, PackageStatus status)  
+        {
+          // here you can monitor download process %
+        }
+
+        @Override
+        public void onPackageCancelled(String id, int version) {
+        }
+
+        @Override
+        public void onPackageUpdated(String id, int version) {
+          Log.d(Const.LOG_TAG, "Offline package updated: " + id);
+        }
+
+        @Override
+        public void onPackageFailed(String id, int version, PackageErrorType errorType) {
+            Log.e(Const.LOG_TAG, "Offline package update failed: " + id);
+        }
+    }
+
+
+</pre>
+</div>
+
+<div id="n2">
+<pre class="brush: csharp">
+
+    /**
+     * Listener for package manager events. Contains many empty methods.
+     */
+    class RoutePackageManagerListener : PackageManagerListener {
+
+        private OfflineRouting controller;
+
+        public RoutingPackageListener(OfflineRouting controller){
+            this.controller = controller;
+        }
+
+        public override void OnPackageListUpdated() {
+            Log.Debug("Package list updated");
+            // We have packages all country/regions
+            // see list of available ID-s: https://developer.nutiteq.com/guides/packages
+            // just append -routing to the ID-s
+            // You can download several packages, and route is found through all of them
+
+            controller.packageManager.StartPackageDownload("EE-routing");
+            controller.packageManager.StartPackageDownload("LV-routing");
+        }
+
+        public override void OnPackageListFailed() {
+            Log.Error("Package list update failed");
+        }
+
+        public override void OnPackageStatusChanged(String id, int version, PackageStatus status) {
+          // here you can get progress of download
+        }
+
+        public override void OnPackageCancelled(String id, int version) {
+        }
+
+        public override void OnPackageUpdated(String id, int version) {
+            Log.Debug("Offline package updated: " + id);
+        }
+
+        public override void OnPackageFailed(String id, int version, PackageErrorType errorType) {
+            Log.Error("Offline package download failed: " + id);
+        }
+    }
+
+</pre>
+</div>
+
+<p></div></p>
+
+<p>You may ask why here EE and LV (Estonia and Latvia) packages are used in the sample? It is not by chance - there are recent <a href="http://www.baltictimes.com/estonian_president_marries_latvian_cyber_defence_expert/">tight personal links between these two countries</a>, so offline routing has to go across borders.</p>
+
+<h4>3. Init instance of PackageManagerListener, start PackageManager and package list update</h4>
+
+<p>To link PackageManagerListener with PackageManager properly (and to have a fully working RoutingService as a result) you need to do following steps in the code. Note that we need to pass packageManager reference to the listener, otherwise the listener can not start downloads. This depends on platform and your app architecture.</p>
+
+<div id="tabs3">
+  <ul>
+    <li><a href="routing.html#i3"><span>iOS ObjC</span></a></li>
+    <li><a href="routing.html#a3"><span>Android Java</span></a></li>
+    <li><a href="routing.html#n3"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i3">
+<pre class="brush: objc">
+
+     // 1. create routePackageManagerListener with your listener class
+     RoutePackageManagerListener* _packageManagerListener = [[RoutePackageManagerListener alloc] init];
+    [_packageManagerListener setPackageManager: packageManager];
+    
+    // Attach package manager listener
+    [packageManager setPackageManagerListener:_packageManagerListener];
+
+    // start PackageManager
+    [packageManager start];
+    
+    // 2. now start download of packageList. When download is done, then the 
+    // listener's OnPackageListUpdated() is called
+    [packageManager startPackageListDownload];
+    
+    // 3. create offline routing service connected to package manager
+    _offlineRoutingService = [[NTPackageManagerRoutingService alloc] initWithPackageManager:packageManager];
+
+</pre>
+</div>
+
+<div id="a3">
+<pre class="brush: java">
+        
+        // 1. set listener, and start PackageManager
+        packageManager.setPackageManagerListener(new RoutePackageManagerListener());
+        packageManager.start();
+        
+        // 2. fetch list of available packages from server. Note that this is asynchronous operation and listener will be notified via onPackageListUpdated when this succeeds.        
+        packageManager.startPackageListDownload();
+        
+         // 3. create offline routing service connected to package manager
+        offlineRoutingService = new PackageManagerRoutingService(packageManager);
+        
+</pre>
+</div>
+
+<div id="n3">
+<pre class="brush: csharp">
+
+            // 1. create and set listener, and start PackageManager
+            packageManager.PackageManagerListener = new RoutingPackageListener(this);
+            packageManager.Start();
+
+            // 2. fetch list of available packages from server. Note that this is asynchronous operation and listener will be notified via onPackageListUpdated when this succeeds.        
+            packageManager.StartPackageListDownload();
+
+            // 3. create offline routing service connected to package manager
+            offlineRoutingService = new PackageManagerRoutingService(packageManager);
+</pre>
+</div>
+
+<p></div></p>
+
+<h4>4. Do actual route calculation</h4>
+
+<p>All this preparation was needed to ensure that you have routing package downloaded and service is prepared. Actual routing is quite simple - you define <em>RoutingRequest</em> with at least 2 points, start routing with the service and read response as <em>RoutingResult</em>. In fact, it is exactly the same as in online routing chapter, just replace onlineRoutingService with offlineRoutingService, see example 2 above.</p>
+
+<script>
+        $( "#tabs1" ).tabs();
+        $( "#tabs2" ).tabs();
+        $( "#tabs3" ).tabs();
+        $( "#tabs4" ).tabs();
+        $( "#tabs5" ).tabs();
+</script>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="d3m9GKD+3PMdtXSCsoi777asv/dQNkDu9nXTfD2tXx2HyDenoK2BSFvs8RltxS413X8iwjfNj+qTtAs+SpKU7A==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Data sources</h1>
+<p>Following DataSources are available for Nutiteq <span class="caps">SDK</span> 3.x on all supported platforms (iOS, Android and others).</p>
+<p>Some DataSources are more universal and could be used for different data types and Layers: vector or raster, others can be used for specific layer type only.</p>
+<h3 id="offline-maps">1. Offline maps from MBTiles</h3>
+<p><strong>MBTilesTileDataSource</strong> is universal datasource for vector or raster data, so it can be used two ways.</p>
+<p><strong>a) MBtiles as RasterTileLayer</strong></p>
+<p>For raster data it needs <a href="https://github.com/mapbox/mbtiles-spec">MBTiles</a> format files, see <a href="mbtiles.html">MBTiles guide</a> with list of some tools and sources to generate them.</p>
+
+<div id="tabs1">
+<ul>
+    <li><a href="data-sources.html#i1"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a1"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n1"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i1">
+<pre class="brush: objc">
+   // file-based local offline datasource
+   NSString* fullpathVT = [[NSBundle mainBundle] pathForResource:@"MBTILESFILENAME" ofType:@"mbtiles"];
+   NTTileDataSource* tileDataSource = [[NTMBTilesTileDataSource alloc] initWithPath: fullpathVT];
+  
+   // Initialize a raster layer with the previous data source
+   NTRasterTileLayer* rasterLayer = [[NTRasterTileLayer alloc] initWithDataSource:tileDataSource];
+  
+   // Add the raster layer to the map
+   [[mapView getLayers] add:rasterLayer];
+
+</pre>
+</div>
+<div id="a1">
+<pre class="brush: java">
+
+  // Create tile data source.
+  MBTilesTileDataSource tileDataSource = new MBTilesTileDataSource(filePath);
+  
+  // Create layer and add to map
+  TileLayer rasterLayer = new RasterTileLayer(tileDataSource);
+  
+  mapView.getLayers().add(rasterLayer);
+
+</pre>
+</div>
+<div id="n1">
+<pre class="brush: csharp">
+
+// NB!: the path to file is platfrom-specific.
+
+var mbTilesLayer = new RasterTileLayer (new MBTilesTileDataSource (filePath));
+mapView.Layers.Add (mbTilesLayer);
+
+
+</pre>
+</div>
+</div>
+<p><strong>b) MBtiles as VectorTileLayer</strong></p>
+<p>For own packaged vector data you need Nutiteq specific vector files packages (<span class="caps">NTVT</span> &#8211; <em>NutiTeq Vector Tile</em>) and styling files in Mapnik <span class="caps">XML</span> format. Here is  free sample packages with OpenStreetMap data:</p>
+<ul>
+	<li><a href="https://dl.dropboxusercontent.com/u/3573333/public_web/ntvt_packages/estonia_ntvt.mbtiles">estonia_ntvt.mbtiles</a></li>
+</ul>
+<p>Nutiteq <span class="caps">SDK</span> provides built-in download service called <b>Package Manager</b> to get the map packages for a country or smaller region easily, this is described in separate page: <a href="offline-maps.html">learn more</a> . Sample here is for case when you have <b>own generated MBTiles file with vector data</b>.</p>
+<p>Vector maps needs always proper <strong>style definition</strong>. You can find compatible stylesheet files from sample code, these are zip files which have <strong>Mapnik <span class="caps">XML</span> styling</strong> with resources (fonts, images) inside. You can use ones with sample projects, e.g. OSMBright with 3D buildings <a href="https://github.com/nutiteq/hellomap3d-android/blob/master/com.nutiteq.advancedmap3/assets/osmbright.zip">osmbright.zip</a>. See <a href="vector-styles.html">Vector Tile Styling</a> for details about styling.</p>
+<div id="tabs2">
+<ul>
+    <li><a href="data-sources.html#i2"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a2"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n2"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i2">
+<pre class="brush: objc">
+  // 1. define file-based local offline datasource
+  NSString* fullpathVT = [[NSBundle mainBundle] pathForResource:@"estonia_ntvt" ofType:@"mbtiles"];
+  NTTileDataSource* tileDataSource = [[NTMBTilesTileDataSource alloc] initWithMinZoom:0 maxZoom:4 path: fullpathVT];
+  
+  // 2. Load vector tile styleset
+  UnsignedCharVector *vectorTileStyleSetData = [NTAssetUtils loadBytes: @"osmbright.zip"];
+  NTMBVectorTileStyleSet *vectorTileStyleSet = [[NTMBVectorTileStyleSet alloc] initWithData:vectorTileStyleSetData];
+  
+  // 3. Create vector tile decoder using the styleset
+  NTMBVectorTileDecoder *vectorTileDecoder = [[NTMBVectorTileDecoder alloc] initWithStyleSet:vectorTileStyleSet];
+  
+  // 4. Create vector tile layer, using previously created data source and decoder
+  NTVectorTileLayer *vectorTileLayer = [[NTVectorTileLayer alloc] initWithDataSource:vectorTileDataSource decoder:vectorTileDecoder];
+  
+  // 5. Add vector tile layer
+  [[mapView getLayers] add:vectorTileLayer];
+</pre>
+</div>
+<div id="a2">
+<pre class="brush: java">
+  // 1. Create tile data source from mbtiles file
+  MBTilesTileDataSource tileDataSource = new MBTilesTileDataSource("/sdcard/estonia_ntvt.mbtiles");
+
+  // 2. Load vector tile styleset
+  UnsignedCharVector styleBytes = AssetUtils.loadBytes("osmbright.zip");
+  MBVectorTileStyleSet vectorTileStyleSet = new MBVectorTileStyleSet(styleBytes);
+  
+  // 3. Create vector tile decoder using the styleset
+  VectorTileDecoder vectorTileDecoder = new MBVectorTileDecoder(vectorTileStyleSet);
+  
+  // 4. Create vector tile layer, using previously created data source and decoder
+  TileLayer vectorTileLayer = new VectorTileLayer(tileDataSource, vectorTileDecoder);
+
+  // 5. Add vector tile layer
+  mapView.getLayers().add(vectorTileLayer);
+
+</pre>
+</div>
+<div id="n2">
+<pre class="brush: csharp">
+// 1. Create tile data source from mbtiles file
+var tileDataSource = new MBTilesTileDataSource("/sdcard/mapxt/estonia_ntvt.mbtiles");
+
+// 2. Load vector tile styleset
+var styleBytes = AssetUtils.LoadBytes("osmbright.zip");
+var vectorTileStyleSet = new MBVectorTileStyleSet(styleBytes);
+
+// 3. Create vector tile decoder using the styleset
+var vectorTileDecoder = new MBVectorTileDecoder(vectorTileStyleSet);
+
+// 4. Create vector tile layer, using previously created data source and decoder
+var vectorTileLayer = new VectorTileLayer(tileDataSource, vectorTileDecoder);
+
+// 5. Add vector tile layer
+mapView.Layers.Add(vectorTileLayer);
+
+</pre>
+</div>
+</div>
+
+<h3 id="online-maps">2. Online maps</h3>
+<p><b>HTTPTileDataSource</b> is also universal datasource for vector or raster data.</p>
+<p><strong>a) Nutiteq online Vector Tile Layer</strong></p>
+<p>Nutiteq <span class="caps">SDK</span> provides support for built-in vector tiles, as provided by Nutiteq Maps as a Service packages and it is available for all plans. This is suitable as universial base map.</p>
+<p>For vector styling you use exactly same osmbright.zip file as for offline tiles, see above.</p>
+<div id="tabs3">
+<ul>
+    <li><a href="data-sources.html#i3"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a3"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n3"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i3">
+<pre class="brush: objc">
+NTVectorTileLayer* vectorTileLayer = [[NTNutiteqOnlineVectorTileLayer alloc] initWithStyleAssetName:@"osmbright.zip"];
+[[mapView getLayers] add:vectorTileLayer];
+</pre>
+</div>
+<div id="a3">
+<pre class="brush: java">
+// Create base layer. Use vector style from assets (osmbright.zip)
+VectorTileLayer baseLayer = new NutiteqOnlineVectorTileLayer("osmbright.zip");
+mapView.getLayers().add(baseLayer);
+</pre>
+</div>
+<div id="n3">
+<pre class="brush: csharp">
+// Create base layer. Use vector style from assets (osmbright.zip)
+var baseLayer = new NutiteqOnlineVectorTileLayer("osmbright.zip");
+mapView.Layers.Add(baseLayer);
+</pre>
+</div>
+</div>
+<p><strong>b) Web (<span class="caps">HTTP</span>) tiles as VectorTileLayer</strong></p>
+<p>With Nutiteq Starter, Pro or Enterprise plans you can use also other vector tile map data sources. It is similar to custom raster map data sources, only adding vector decoder is needed.</p>
+<p>Here we connect to MapBox vector tiles, which have very similar (but not identical) data structure, so we can use same osmbright.zip vector styling. Before using this in your app please check also from MapBox if they allow this, and make sure you use your MapBox key in <span class="caps">URL</span>. You may need to use your own vector tile server <span class="caps">URL</span>, and your suitable styling instead.</p>
+<p>Following tags are supported in <span class="caps">URL</span> definition: <b>zoom, x, y, xflipped, yflipped, quadkey</b>.</p>
+<div id="tabs4">
+<ul>
+    <li><a href="data-sources.html#i4"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a4"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n4"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i4">
+<pre class="brush: objc">
+
+// 1. define data source
+NTTileDataSource* tileDataSource = [[NTHTTPTileDataSource alloc] initWithMinZoom:0 maxZoom:14 baseURL:@"http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v5/{zoom}/{x}/{y}.vector.pbf?access_token=YOUR-MAPBOX-TOKEN"];
+
+// 2. Load vector tile styleset
+NTUnsignedCharVector *vectorTileStyleSetData = [NTAssetUtils loadBytes: @"osmbright.zip"];
+NTMBVectorTileStyleSet *vectorTileStyleSet = [[NTMBVectorTileStyleSet alloc] initWithData:vectorTileStyleSetData];
+
+// 3. Create vector tile decoder using the styleset
+NTMBVectorTileDecoder *vectorTileDecoder = [[NTMBVectorTileDecoder alloc] initWithStyleSet:vectorTileStyleSet];
+  
+// 4. Create vector tile layer, using previously created data source and decoder
+NTVectorTileLayer *vectorTileLayer = [[NTVectorTileLayer alloc] initWithDataSource:tileDataSource decoder:vectorTileDecoder];
+
+// 5. Add vector tile layer
+[[mapView getLayers] add:vectorTileLayer];
+
+</pre>
+</div>
+<div id="a4">
+<pre class="brush: java">
+// 1. define data source
+TileDataSource vectorTileDataSource = new HTTPTileDataSource(0, 14, "http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v5/{zoom}/{x}/{y}.vector.pbf?access_token=YOUR-MAPBOX-TOKEN");
+
+// 2. Create style set
+MBVectorTileStyleSet vectorTileStyleSet = new MBVectorTileStyleSet(styleBytes);
+MBVectorTileDecoder vectorTileDecoder = new MBVectorTileDecoder(vectorTileStyleSet);
+
+// 3. Create layer and add to map
+
+TileLayer baseLayer = new VectorTileLayer(vectorTileDataSource, vectorTileDecoder);
+mapView.getLayers().add(baseLayer);
+</pre>
+</div>
+<div id="n4">
+<pre class="brush: csharp">
+// 1. define data source
+var vectorTileDataSource = new HTTPTileDataSource(0, 14, "http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v5/{zoom}/{x}/{y}.vector.pbf?access_token=YOUR-MAPBOX-TOKEN");
+
+// 2. Create style set
+var styleBytes = AssetUtils.LoadBytes("osmbright.zip");
+var vectorTileStyleSet = new MBVectorTileStyleSet(styleBytes);
+var vectorTileDecoder = new MBVectorTileDecoder(vectorTileStyleSet);
+
+// 3. Create layer and add to map
+
+var baseLayer = new VectorTileLayer(vectorTileDataSource, vectorTileDecoder);
+mapView.Layers.Add(baseLayer);
+</pre>
+</div>
+</div>
+
+<p><strong>b) Web (<span class="caps">HTTP</span>) tiles as RasterTileLayer</strong></p>
+<p>For online raster tiles you can use any common web tiles in <span class="caps">PNG</span> or <span class="caps">JPG</span> formats, in Spherical Mercator system. See our <a href="raster-tile-sources.html">Raster tile sources list</a> .</p>
+<p>Following tags are supported in <span class="caps">URL</span> definition: <b>zoom, x, y, xflipped, yflipped, quadkey</b>.</p>
+<div id="tabs5">
+<ul>
+    <li><a href="data-sources.html#i5"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a5"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n5"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i5">
+<pre class="brush: objc">
+// Initialize a OSM raster data source from MapQuest Open Tiles
+NTHTTPTileDataSource* baseRasterTileDataSource = [[NTHTTPTileDataSource alloc] initWithMinZoom:0 maxZoom:19 baseURL:@"http://otile1.mqcdn.com/tiles/1.0.0/osm/{zoom}/{x}/{y}.png"];
+  
+// Initialize a raster layer with the previous data source
+NTRasterTileLayer* rasterLayer = [[NTRasterTileLayer alloc] initWithDataSource:baseRasterTileDataSource];
+  
+// Add the previous raster layer to the map
+[[mapView getLayers] add:rasterLayer];
+</pre>
+</div>
+<div id="a5">
+<pre class="brush: java">
+
+// Create a Bing raster data source. Note: tiles start from level 1, there is no single root tile!
+TileDataSource baseRasterTileDataSource = new HTTPTileDataSource(1, 19, "http://ecn.t3.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=471&amp;mkt=en-US");
+
+TileLayer baseLayer = new RasterTileLayer(baseRasterTileDataSource);
+
+mapView.getLayers().add(baseLayer);
+</pre>
+</div>
+<div id="n5">
+<pre class="brush: csharp">
+
+// Create a Bing raster data source. Note: tiles start from level 1, there is no single root tile!
+var baseRasterTileDataSource = new HTTPTileDataSource(1, 19, "http://ecn.t3.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=471&amp;mkt=en-US");
+
+// create layer and add to map
+var baseLayer = new RasterTileLayer(baseRasterTileDataSource);
+mapView.Layers.Add(baseLayer);
+</pre>
+</div>
+</div>
+
+<h3 id="application-defined-vector-data">3. Application-defined vector overlay</h3>
+<p>Nutiteq <span class="caps">SDK</span> has in-memory datasources where application can add vector objects which are shown on map as overlay layer.</p>
+<p><strong>LocalVectorDataSource</strong> is a dynamic data source that is empty initially and supports adding/removing objects. Objects are kept in local memory and the state is not persistent. By default, all added objects are always rendered. For detailed code samples see <a href="overlays.html">map data overlay</a> page, this has samples how to add Points, Markers, Texts, Lines and Polygons to map.</p>
+<h3 id="ground-overlay">4. Application-defined ground overlays</h3>
+<p>Nutiteq <span class="caps">SDK</span> supports <strong>Ground Overlays</strong> &#8211; bitmaps (<span class="caps">PNG</span>, <span class="caps">JPG</span> etc) which are put to map to your defined location. Most commonly this is used for <b>indoor floorplans</b>, but it can be used also for other cases.</p>
+<p><strong>BitmapOverlayRasterTileDataSource</strong> defines bitmap image, and geographical coordinates of the bitmap. See <a href="ground-overlays.html">Ground Overlay guide</a> for more info.</p>
+<h3 id="virtual-data-sources">5. Virtual data sources</h3>
+<p>There are some DataSources which take another DataSource as input, do internal logic or processing and output DataSource itself. This way you can pipe datasources to have customized logic.</p>
+<ul>
+	<li><strong>PersistentCacheTileDataSource</strong></li>
+</ul>
+<p>Caches <span class="caps">HTTP</span> tiles to a persistent sqlite database file. If tile exists in the database, then request to original data source is skipped. Can be used for both raster and vector tiles. The data source takes original source&#8217;s expires headers into account.</p>
+<div id="tabs6">
+<ul>
+    <li><a href="data-sources.html#i6"><span>iOS ObjC</span></a></li>
+    <li><a href="data-sources.html#a6"><span>Android Java</span></a></li>
+    <li><a href="data-sources.html#n6"><span>.<span class="caps">NET</span> C#</span></a></li>
+</ul>
+<div id="i6">
+<pre class="brush: objc">
+// Initialize a OSM raster data source from MapQuest Open Tiles
+NTHTTPTileDataSource* baseRasterTileDataSource = [[NTHTTPTileDataSource alloc] initWithMinZoom:0 maxZoom:19 baseURL:@"http://otile1.mqcdn.com/tiles/1.0.0/osm/{zoom}/{x}/{y}.png"];
+  
+// Create persistent cache for the given data source  
+NTPersistentCacheTileDataSource* cachedRasterTileDataSource = [[NTPersistentCacheTileDataSource alloc] initWithDataSource:baseRasterTileDataSource databasePath:[NTAssetUtils calculateWritablePath:@"mycache.db"]];
+		
+// Initialize a raster layer with the previous data source
+NTRasterTileLayer* rasterLayer = [[NTRasterTileLayer alloc] initWithDataSource:cachedRasterTileDataSource];
+
+// Add the previous raster layer to the map
+[[self.mapView getLayers] add:rasterLayer];
+</pre>
+</div>
+<div id="a6">
+<pre class="brush: java">
+
+// Create a Bing raster data source. Note: tiles start from level 1, there is no single root tile!
+TileDataSource baseRasterTileDataSource = new HTTPTileDataSource(1, 19, "http://ecn.t3.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=471&amp;mkt=en-US");
+
+// Add persistent caching datasource, tiles will be stored locally on persistent storage
+PersistentCacheTileDataSource cachedDataSource = 
+  new PersistentCacheTileDataSource(baseRasterTileDataSource, getExternalFilesDir(null)+"/mapcache.db");
+
+// Create layer and add to map
+TileLayer baseLayer = new RasterTileLayer(cachedDataSource);
+mapView.getLayers().add(baseLayer);
+</pre>
+</div>
+<div id="n6">
+<pre class="brush: csharp">
+
+// Create a Bing raster data source. Note: tiles start from level 1, there is no single root tile!
+var baseRasterTileDataSource = new HTTPTileDataSource(1, 19, "http://ecn.t3.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=471&amp;mkt=en-US");
+
+// Add persistent caching datasource, tiles will be stored locally on persistent storage
+// fileDir must be a directory where files can be written - this is platform-specific
+var cachedDataSource = 
+  new PersistentCacheTileDataSource(baseRasterTileDataSource, fileDir+"/mapcache.db");
+
+
+// create layer and add to map
+var baseLayer = new RasterTileLayer(cachedDataSource);
+mapView.Layers.Add(baseLayer);
+</pre>
+</div>
+</div>
+<ul>
+	<li><strong>CompressedCacheTileDataSource</strong></li>
+</ul>
+<p>An in-memory cache data source. Though layers also cache tiles, the tiles are uncompressed and usually take 2-5x more memory after being loaded. CompressedCacheTileDataSource keeps all tiles in compressed format and thus makes better use of existing memory.</p>
+<ul>
+	<li><strong>CombinedTileDataSource</strong></li>
+</ul>
+<p>A tile data source that combines two data sources (usually offline and online) and selects tiles based on zoom level. All requests below specified zoom level are directed to the first data source and all requests at or above specified zoom level are directed to the second data source.</p>
+<h3 id="other-built-in-data-sources">6. Other built-in data sources</h3>
+<ul>
+	<li><strong>AssetTileDataSource</strong> &#8211; loads offline tiles data from a folder (/sdcard or Application sandbox, depends on platform). You can use for example zoom/x/y.png or zoom_x_y.png file naming structures for offline data.</li>
+	<li><strong>NMLModelLODTreeOnlineDataSource</strong> &#8211; uses <span class="caps">NMLDB</span> online <span class="caps">API</span> for &#8220;3D city&#8221; layer. 3D tools are provided as commercial service, contact Nutiteq to get more info about it.</li>
+	<li><strong>NMLModelLODTreeSqliteDataSource</strong> &#8211; An offline version of <em>NMLModelLODTreeOnlineDataSource</em>, model info is kept in sqlite database file. Note that simple individual 3D objects (<span class="caps">NML</span> models) can be added to usual <em>LocalVectorDataSource</em>.</li>
+</ul>
+<h3 id="shapefile">7. Shapefiles, GeoTIFF an other <span class="caps">GIS</span> data dources</h3>
+<p>With the <span class="caps">GIS</span> extension we provide <b>OGRVectorDataSource</b> and <b>GDALRasterTileDataSource</b> which can open <span class="caps">ESRI</span> Shapefile, GeoTIFF, <span class="caps">KML</span>, <span class="caps">GML</span>, <span class="caps">GPX</span>, MapInfo and many other <span class="caps">GIS</span> vector and raster formats directly. Your code just defines file and layer to be used. Nutiteq provides it as commercial package, also free evaluation is avaliable, email sales@nutiteq.com to get it.</p>
+<h3 id="custom-data-sources">8. Custom data sources</h3>
+<p>Last but not least &#8211; your application can define own Data Sources.</p>
+<p>See <em>MyMergedRasterTileDataSource</em> in samples to get example for virtual datasource which takes raster data from two raster datasources and merges the map in pixel level. Note that the second datasources should have a lot of transparent or semitransparent pixels, or the pixels from the first datasource will be hidden.</p>
+<p>Custom DataSource should extend one of following abstract base classes:</p>
+<ul>
+	<li><strong>TileDataSource</strong> &#8211; for tiles (raster or vector)</li>
+	<li><strong>VectorDataSource</strong> &#8211; for vector objects</li>
+	<li><strong>CacheTileDataSource</strong> &#8211; for custom tile caching (it is a <em>TileDataSource</em>)</li>
+</ul>
+<script>
+		$( "#tabs1" ).tabs();
+		$( "#tabs2" ).tabs();
+		$( "#tabs3" ).tabs();
+		$( "#tabs4" ).tabs();
+  		$( "#tabs5" ).tabs();
+  		$( "#tabs6" ).tabs();
+</script>
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

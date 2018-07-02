@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="s5NEsRHOaZMn1fM0nVjgcio519837LOiH4hdmwXPzEtDIs4OEZ00KGGMdq9CFXWoQepK6lAXfKZ6SYXZcvAHug==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Ground Overlays</h1>
+
+<p>Nutiteq SDK since 3.1 supports <em>Ground Overlays</em> - bitmaps (PNG, JPG etc) which are put to map to your defined location. Most commonly this is used for <strong>indoor floorplans</strong>, but it can be used also for other cases.</p>
+
+<p><img src = "../images/ground_overlay.png.html" alt = "Sample bitmap" width="550"></p>
+
+<p>Your bitmap must be have defined <strong>geographical map coordinates</strong>, and this is done using <em>Ground Control Points</em>. Currently we support exactly 3 or 4 points defined on bitmap and real world, with following rules:</p>
+
+<ul>
+<li>With 3 control points you set location, size and rotation of bitmap. This does <em>linear affine transformation</em>.</li>
+<li>With 4 control points you can have <em>perspective transformation</em>.</li>
+<li>If you have more control points in your data, then you should select 3/4 best ones, and use these.</li>
+<li>Control points must be defined in app code. SDK does not read this automatically from source file metadata. So if you need GeoTIFF, ESRI World File, MapInfo TAB, Geospatial PDF or another already referenced data, then you will get this from GIS Extension (see below).</li>
+</ul>
+
+<p>Key limitation with Nutiteq standard SDK package is that <strong>whole bitmap must fit to device memory</strong> (RAM), so maximum size could be something like 2000x2000 pixels or so, depending on target device. For larger rasters you can use <strong>Nutiteq SDK GIS Extension</strong> which allows to show any size bitmaps, even hundreds of megabytes, and these are read directly from common GIS raster formats, e.g. GeoTIFF, BSB, ECW, MrSID, JPEG2000 etc, and source data can be in different coordinate systems. Please ask from <a href="mailto:sales@nutiteq.com">sales@nutiteq.com</a> if you need this.</p>
+
+<p>Following sample assumes that you have bitmap file <strong>jefferson-building-ground-floor.jpg</strong> in your application project: under <em>assets</em> in Android, anywhere in project in iOS. Here we use only one geographical coordinate, and we know size of the building and that it is exactly heading to north, so we can calculate other ground points with the code. Now four ground control points are set to the corners of the bitmap, which gives usually most accurate result. </p>
+
+<div id="tabs1">
+  <ul>
+    <li><a href="ground-overlays.html#i1"><span>iOS ObjC</span></a></li>
+    <li><a href="ground-overlays.html#a1"><span>Android Java</span></a></li>
+    <li><a href="ground-overlays.html#n1"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i1">
+<pre class="brush: objc">
+// Load ground overlay bitmap
+NTBitmap* overlayBitmap = [[NTBitmap alloc] initWithCompressedData:[NTAssetUtils loadBytes:@"jefferson-building-ground-floor.jpg"] pow2Padding:NO];
+
+// Create two vector containing geographical positions and corresponding raster image pixel coordinates
+NTMapPos* pos = [proj fromWgs84:[[NTMapPos alloc] initWithX:-77.004590 y:38.888702]];
+double sizeNS = 110, sizeWE = 100;
+
+NTMapPosVector* mapPoses = [[NTMapPosVector alloc] init];
+[mapPoses add:[[NTMapPos alloc] initWithX:[pos getX]-sizeWE y:[pos getY]+sizeNS]];
+[mapPoses add:[[NTMapPos alloc] initWithX:[pos getX]+sizeWE y:[pos getY]+sizeNS]];
+[mapPoses add:[[NTMapPos alloc] initWithX:[pos getX]+sizeWE y:[pos getY]-sizeNS]];
+[mapPoses add:[[NTMapPos alloc] initWithX:[pos getX]-sizeWE y:[pos getY]-sizeNS]];
+
+NTScreenPosVector* bitmapPoses = [[NTScreenPosVector alloc] init];
+[bitmapPoses add:[[NTScreenPos alloc] initWithX:0 y:0]];
+[bitmapPoses add:[[NTScreenPos alloc] initWithX:0 y:[overlayBitmap getOrigHeight]]];
+[bitmapPoses add:[[NTScreenPos alloc] initWithX:[overlayBitmap getOrigWidth] y:[overlayBitmap getOrigHeight]]];
+[bitmapPoses add:[[NTScreenPos alloc] initWithX:[overlayBitmap getOrigWidth] y:0]];
+
+// Create bitmap overlay raster tile data source
+NTBitmapOverlayRasterTileDataSource* rasterDataSource = [[NTBitmapOverlayRasterTileDataSource alloc] initWithMinZoom:0 maxZoom:20 bitmap:overlayBitmap projection:proj mapPoses:mapPoses bitmapPoses:bitmapPoses];
+NTRasterTileLayer* rasterLayer = [[NTRasterTileLayer alloc] initWithDataSource:rasterDataSource];
+[[self.mapView getLayers] add:rasterLayer];
+
+// Apply zoom level bias to the raster layer.
+// By default, bitmaps are upsampled on high-DPI screens.
+// We will correct this by applying appropriate bias
+float zoomLevelBias = log([[self.mapView getOptions] getDPI] / 160.0f) / log(2);
+[rasterLayer setZoomLevelBias:zoomLevelBias * 0.75f];
+[rasterLayer setTileSubstitutionPolicy:NT_TILE_SUBSTITUTION_POLICY_VISIBLE];
+
+[self.mapView setFocusPos:pos durationSeconds:0];
+[self.mapView setZoom:15.5f durationSeconds:0];
+</pre>
+</div>
+
+<div id="a1">
+<pre class="brush: java">
+Projection proj = mapView.getOptions().getBaseProjection();
+
+// Load ground overlay bitmap
+com.nutiteq.graphics.Bitmap overlayBitmap = new com.nutiteq.graphics.Bitmap(AssetUtils.loadBytes("jefferson-building-ground-floor.jpg"), false);
+
+// Create two vector containing geographical positions and corresponding raster image pixel coordinates
+MapPos pos = proj.fromWgs84(new MapPos(-77.004590, 38.888702));
+double sizeNS = 110, sizeWE = 100;
+
+MapPosVector mapPoses = new MapPosVector();
+mapPoses.add(new MapPos(pos.getX()-sizeWE, pos.getY()+sizeNS));
+mapPoses.add(new MapPos(pos.getX()+sizeWE, pos.getY()+sizeNS));
+mapPoses.add(new MapPos(pos.getX()+sizeWE, pos.getY()-sizeNS));
+mapPoses.add(new MapPos(pos.getX()-sizeWE, pos.getY()-sizeNS));
+
+ScreenPosVector bitmapPoses = new ScreenPosVector();
+bitmapPoses.add(new ScreenPos(0, 0));
+bitmapPoses.add(new ScreenPos(0, overlayBitmap.getOrigHeight()));
+bitmapPoses.add(new ScreenPos(overlayBitmap.getOrigWidth(), overlayBitmap.getOrigHeight()));
+bitmapPoses.add(new ScreenPos(overlayBitmap.getOrigWidth(), 0));
+
+// Create bitmap overlay raster tile data source
+BitmapOverlayRasterTileDataSource rasterDataSource = new BitmapOverlayRasterTileDataSource(0, 20, overlayBitmap, proj, mapPoses, bitmapPoses);
+RasterTileLayer rasterLayer = new RasterTileLayer(rasterDataSource);
+mapView.getLayers().add(rasterLayer);
+
+// Apply zoom level bias to the raster layer.
+// By default, bitmaps are upsampled on high-DPI screens.
+// We will correct this by applying appropriate bias
+float zoomLevelBias = (float) (Math.log(mapView.getOptions().getDPI() / 160.0f) / Math.log(2));
+rasterLayer.setZoomLevelBias(zoomLevelBias * 0.75f);
+rasterLayer.setTileSubstitutionPolicy(TileSubstitutionPolicy.TILE_SUBSTITUTION_POLICY_VISIBLE);
+
+mapView.setFocusPos(pos, 0);
+mapView.setZoom(15.5f, 0);
+</pre>
+</div>
+
+<div id="n1">
+<pre class="brush: csharp">
+// Load ground overlay bitmap
+var overlayBitmap = new Bitmap (AssetUtils.LoadBytes("jefferson-building-ground-floor.jpg"), false);
+
+// Create two vector containing geographical positions and corresponding raster image pixel coordinates
+var pos = proj.FromWgs84(new MapPos(-77.004590, 38.888702));
+var sizeNS = 110;
+var sizeWE = 100;
+
+var mapPoses = new MapPosVector();
+mapPoses.Add(new MapPos(pos.X-sizeWE, pos.Y+sizeNS));
+mapPoses.Add(new MapPos(pos.X+sizeWE, pos.Y+sizeNS));
+mapPoses.Add(new MapPos(pos.X+sizeWE, pos.Y-sizeNS));
+mapPoses.Add(new MapPos(pos.X-sizeWE, pos.Y-sizeNS));
+
+var bitmapPoses = new ScreenPosVector();
+bitmapPoses.Add(new ScreenPos(0, 0));
+bitmapPoses.Add(new ScreenPos(0, overlayBitmap.OrigHeight));
+bitmapPoses.Add(new ScreenPos(overlayBitmap.OrigWidth, overlayBitmap.OrigHeight));
+bitmapPoses.Add(new ScreenPos(overlayBitmap.OrigWidth, 0));
+
+// Create bitmap overlay raster tile data source
+var rasterDataSource = new BitmapOverlayRasterTileDataSource(0, 20, overlayBitmap, proj, mapPoses, bitmapPoses);
+var rasterLayer = new RasterTileLayer(rasterDataSource);
+mapView.Layers.Add(rasterLayer);
+
+// Apply zoom level bias to the raster layer.
+// By default, bitmaps are upsampled on high-DPI screens.
+// We will correct this by applying appropriate bias
+float zoomLevelBias = (float) (Math.Log(mapView.Options.DPI / 160.0f) / Math.Log(2));
+rasterLayer.ZoomLevelBias = zoomLevelBias * 0.75f;
+rasterLayer.TileSubstitutionPolicy = TileSubstitutionPolicy.TileSubstitutionPolicyVisible;
+
+mapView.SetFocusPos(pos, 0);
+mapView.SetZoom(15.5f, 0);
+
+</pre>
+</div>
+
+<p></div></p>
+
+<script>
+        $( "#tabs1" ).tabs();
+        $( "#tabs2" ).tabs();
+        $( "#tabs3" ).tabs();
+        $( "#tabs4" ).tabs();
+        $( "#tabs5" ).tabs();
+</script>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

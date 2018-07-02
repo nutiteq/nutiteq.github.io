@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="IW54G5FvEcobriTcVKZ3UQL1MtLtbboR2WBbQPWO8IDR3/KkkTxMcV33oUeL6+KLaSav54qWdRW8oYMCgrE7cQ==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Clusters</h1>
+
+<p>In many cases you may have so many Points of Interest (POIs) that these cannot be shown on map as individual markers - map view would be cluttered and eventually also slow or even run out of memory. One of the methods to resolve the issue would be to replace individual objects with <em>clusters</em> - Markers which show location of several objects. Often marker clusters shows number of objects which each marker includes.</p>
+
+<p><img src="http://share.gifyoutube.com/vMPDzX.gif" alt="Cluster sample"></p>
+
+<p>Since Nutiteq SDK 3.2 there is built-in cluster feature, which is highly customizable. You can define in you app code:</p>
+
+<ul>
+<li>style for cluster objects</li>
+<li>generate cluster object style dynamically, so it has e.g. number of objects in it</li>
+<li>define minimum zoom level for clusters</li>
+<li>set minimum distance between objects before it becomes cluster</li>
+<li>decide action for clicking on marker - e.g. zoom in, or expand cluster right away (without zoom). The latter works for small clusters (up to 4 objects inside)</li>
+</ul>
+
+<p>Clusters are generated dynamically, based on VectorDataSource data, during loading of the map view with the layer. From API point of view it works as a special Layer: <em>ClusteredVectorLayer</em>, and this creation of it you give two parameters:</p>
+
+<ol>
+<li><strong>DataSource</strong> to be used. In most cases it would be <em>LocalVectorDataSource</em> which has already all the elements. It is important the the DataSource gives all elements of layer, not limiting it to current map view bounding box.</li>
+<li><strong>ClusterElementBuilder</strong> implementation, which defines single method <strong>buildClusterElement</strong>.</li>
+</ol>
+
+<h2>1. Define data and layer</h2>
+
+<div id="tabs1">
+  <ul>
+    <li><a href="clusters.html#i1"><span>iOS ObjC</span></a></li>
+    <li><a href="clusters.html#a1"><span>Android Java</span></a></li>
+    <li><a href="clusters.html#n1"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i1">
+<pre class="brush: objc">
+// Initialize a local vector data source
+NTProjection* proj = [[self.mapView getOptions] getBaseProjection];
+NTLocalVectorDataSource* vectorDataSource = [[NTLocalVectorDataSource alloc] initWithProjection:proj];
+
+// Now create Marker objects and add them to vectorDataSource.
+// TODO: this depends on your app! See AdvancedMap for samples with JSON loading and random point generation
+
+// Create element builder
+MyMarkerClusterElementBuilder* clusterElementBuilder = [[MyMarkerClusterElementBuilder alloc] init];
+
+// Initialize a vector layer with the previous data source
+NTClusteredVectorLayer* vectorLayer = [[NTClusteredVectorLayer alloc] initWithDataSource:vectorDataSource clusterElementBuilder:clusterElementBuilder];
+
+// Add the previous vector layer to the map
+[[self.mapView getLayers] add:vectorLayer];
+
+</pre>
+</div>
+
+<div id="a1">
+<pre class="brush: java">
+
+// Initialize a local vector data source
+LocalVectorDataSource vectorDataSource1 = new LocalVectorDataSource(baseProjection);
+
+// Now create Marker objects and add them to vectorDataSource.
+// TODO: this depends on your app! See AdvancedMap for samples with JSON loading and random point generation
+
+// Initialize a vector layer with the previous data source
+ClusteredVectorLayer vectorLayer1 = new ClusteredVectorLayer(vectorDataSource1, new MyClusterElementBuilder(this.getApplication()));
+vectorLayer1.setMinimumClusterDistance(20);
+
+// Add the previous vector layer to the map
+mapView.getLayers().add(vectorLayer1);
+
+</pre>
+</div>
+
+<div id="n1">
+<pre class="brush: csharp">
+
+var proj = new EPSG3857 ();
+
+// Create overlay layer for markers
+var dataSource = new LocalVectorDataSource (proj);
+
+// Now create Marker objects and add them to vectorDataSource.
+// TODO: this depends on your app! See samples with JSON loading
+
+var overlayLayer = new ClusteredVectorLayer (dataSource, new MyClusterElementBuilder());
+overlayLayer.MinimumClusterDistance = 20; // in pixels
+mapView.Layers.Add (overlayLayer);
+
+</pre>
+</div>
+
+<p></div></p>
+
+<h2>2. Define ClusterElementBuilder</h2>
+
+<p>Essentially Cluster Element Builder takes set of original markers (map objects) as input, and returns one Marker (or another VectorElement, like Point or BalloonPopup) which is dynamically replacing the original ones.</p>
+
+<p>What makes it more complicated is that in the ClusterElementBuilder we strongly suggest to reuse (cache) styles to reduce memory usage significantly. So marker style with specific number is only created once. Android and iOS samples use platform-specific graphics APIs to generate bitmap for the marker. .NET example just uses BalloonPopup, which is slower but works same across platforms.</p>
+
+<div id="tabs2">
+  <ul>
+    <li><a href="clusters.html#i2"><span>iOS ObjC</span></a></li>
+    <li><a href="clusters.html#a2"><span>Android Java</span></a></li>
+    <li><a href="clusters.html#n2"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i2">
+<pre class="brush: objc">
+@implementation MyMarkerClusterElementBuilder
+
+-(NTVectorElement*)buildClusterElement:(NTMapPos *)mapPos elements:(NTVectorElementVector *)elements
+{
+    if (!self.markerStyles) {
+        self.markerStyles = [NSMutableDictionary new];
+    }
+    NSString* styleKey = [NSString stringWithFormat:@"%d",(int)[elements size]];
+    if ([elements size] > 1000) {
+        styleKey = @">1K";
+    }
+    NTMarkerStyle* markerStyle = [self.markerStyles valueForKey:styleKey];
+    if ([elements size] == 1) {
+        markerStyle = [(NTMarker*)[elements get:0] getStyle];
+    }
+    if (!markerStyle) {
+        UIImage* image = [UIImage imageNamed:@"marker_black.png"];
+        UIGraphicsBeginImageContext(image.size);
+        [image drawAtPoint:CGPointMake(0, 0)];
+        CGRect rect = CGRectMake(0, 15, image.size.width, image.size.height);
+        [[UIColor blackColor] set];
+        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setAlignment:NSTextAlignmentCenter];
+        NSDictionary *attr = [NSDictionary dictionaryWithObject:style forKey:NSParagraphStyleAttributeName];
+        [styleKey drawInRect:CGRectIntegral(rect) withAttributes:attr];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NTBitmap* markerBitmap = [NTBitmapUtils createBitmapFromUIImage:newImage];
+        NTMarkerStyleBuilder* markerStyleBuilder = [[NTMarkerStyleBuilder alloc] init];
+        [markerStyleBuilder setBitmap:markerBitmap];
+        [markerStyleBuilder setSize:30];
+        //[markerStyleBuilder setHideIfOverlapped:NO];
+        [markerStyleBuilder setPlacementPriority:-(int)[elements size]];
+        markerStyle = [markerStyleBuilder buildStyle];
+        [self.markerStyles setValue:markerStyle forKey:styleKey];
+    }
+    
+    NTMarker* marker = [[NTMarker alloc] initWithPos:mapPos style:markerStyle];
+    [marker setMetaDataElement:@"elements" element:[@([elements size]) stringValue]];
+    return marker;
+}
+
+@end
+
+
+</pre>
+</div>
+
+<div id="a2">
+<pre class="brush: java">
+
+private static class MyClusterElementBuilder extends ClusterElementBuilder {
+        @SuppressLint("UseSparseArrays")
+        private Map < Integer, MarkerStyle >  markerStyles = new HashMap < Integer, MarkerStyle > ();
+        private android.graphics.Bitmap markerBitmap;
+        
+        MyClusterElementBuilder(Application context) {
+            markerBitmap = android.graphics.Bitmap.createBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_black));
+        }
+
+        @Override
+        public VectorElement buildClusterElement(MapPos pos, VectorElementVector elements) {
+            // Try to reuse existing marker styles
+            MarkerStyle style = markerStyles.get((int) elements.size());
+            if (elements.size() == 1) {
+                style = ((Marker) elements.get(0)).getStyle();
+            }
+            if (style == null) {
+                android.graphics.Bitmap canvasBitmap = markerBitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
+                android.graphics.Canvas canvas = new android.graphics.Canvas(canvasBitmap); 
+                android.graphics.Paint paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
+                paint.setTextAlign(Align.CENTER);
+                paint.setTextSize(12);
+                paint.setColor(android.graphics.Color.argb(255, 0, 0, 0));
+                canvas.drawText(Integer.toString((int) elements.size()), markerBitmap.getWidth() / 2, markerBitmap.getHeight() / 2 - 5, paint);
+                MarkerStyleBuilder styleBuilder = new MarkerStyleBuilder();
+                styleBuilder.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(canvasBitmap));
+                styleBuilder.setSize(30);
+                styleBuilder.setPlacementPriority((int)-elements.size());
+                style = styleBuilder.buildStyle();
+                markerStyles.put((int) elements.size(), style);
+            }
+
+            // Create marker for the cluster
+            Marker marker = new Marker(pos, style);
+            return marker;
+        }
+    }
+    
+
+</pre>
+</div>
+
+<div id="n2">
+<pre class="brush: csharp">
+
+class MyClusterElementBuilder : ClusterElementBuilder
+    {
+        BalloonPopupStyleBuilder balloonPopupStyleBuilder;
+
+        public MyClusterElementBuilder() {
+            balloonPopupStyleBuilder = new BalloonPopupStyleBuilder();
+            balloonPopupStyleBuilder.CornerRadius = 3;
+            balloonPopupStyleBuilder.TitleMargins = new BalloonPopupMargins (6, 6, 6, 6);
+            balloonPopupStyleBuilder.LeftColor = new Color(240,230,140,255);
+        }
+
+        public override VectorElement BuildClusterElement(MapPos pos, VectorElementVector elements) {
+            var popup = new BalloonPopup(
+                pos,
+                balloonPopupStyleBuilder.BuildStyle(),
+                elements.Count.ToString(), "");
+            return popup;
+        }
+
+    }
+
+</pre>
+</div>
+
+<p></div></p>
+
+<script>
+        $( "#tabs1" ).tabs();
+        $( "#tabs2" ).tabs();
+        $( "#tabs3" ).tabs();
+        $( "#tabs4" ).tabs();
+        $( "#tabs5" ).tabs();
+</script>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>

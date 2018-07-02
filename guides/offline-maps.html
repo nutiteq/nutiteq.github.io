@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+    <title>CartoDB Estonia OÜ Developer portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../images/favicon.ico.html" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico.html" type="image/x-icon">
+    
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="XhetQNNg/OiEr1gBoZkbUI6qO0YEZ85u9ln63rlu5b2upif/0zOhU8L23Zp+1I6K5Xmmc2OcAWqTmCKczlEuTA==" />
+    
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://code.jquery.com/ui/1.8.3/themes/smoothness/jquery-ui.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="../javascripts/3scale.js"></script>
+    
+    <script src="../javascripts/excanvas.compiled.js"></script>
+    
+    <script src="../javascripts/shCore.js"></script>
+    <script src="../javascripts/shAutoloader.js"></script>
+    <script src="../javascripts/shBrushXml.js"></script>
+    <script src="../javascripts/shBrushJScript.js"></script>
+    <script src="../javascripts/shBrushJava.js"></script>
+    <script src="../javascripts/shBrushObjectiveC.js"></script>
+    <script src="../javascripts/shBrushCSharp.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/default.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/nutiteq.css" />
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/shCoreEclipse.css" />
+
+
+    
+    
+    
+  </head>
+
+  <body>
+    <header role="banner">
+      
+
+      
+
+        <div id="flash-messages">
+          
+        </div>
+  
+    </header>
+
+	<header class="b-header">
+      <div class="l-container">
+        <h1 class="b-header__logo"><a href="http://www.nutiteq.com">Nutiteq</a></h1>
+			<nav class="b-header__nav">
+				<ul class="b-header_nav-list">
+					
+                  <li><a href="../samples.html">Demo</a></li>
+                  <li><a href="../docs.html">Documentation</a></li>
+                  <li><a href="../admin.1.html">Log in</a></li>	
+                  	
+				</ul>
+			</nav>
+		</div>
+    </header>
+    
+    
+    <main id="main-content" role="main">
+      
+        <div class="full">
+          <div class="container">
+  
+            <section class="b-page">
+  <div class="b-page__wrap l-container">
+	<aside class="b-page__sidebar">
+
+	<nav class="b-page__nav">
+	<ul class="b-page__nav-list">
+      <li ><a href="../getting-started.1.html">Getting Started</a></li>
+      <li class="m-active"><a href="../guides.1.html">Guides</a></li>
+      <li ><a href="../pro.html">Pro extensions</a></li>
+      <li ><a href="../samples.html">Sample apps</a></li>
+	  <li ><a href="../reference.html">Browse API reference</a></li>
+      <li ><a href="../downloads.html">Downloads</a></li>
+      <li ><a href="../support.html">Support and feedback</a></li>
+
+	</ul>
+	</nav>
+
+	</aside>
+	<div class="b-page__content">
+      <div class="alert alert-info">
+  <strong>Nutiteq is now part of CARTO!</strong> Please use latest <a href="https://carto.com/docs/carto-engine/mobile-sdk/" class="alert-link">CARTO Mobile SDK</a> for new projects. Nutiteq SDK 3.x support and updates ended in 2017, documentation here is outdated.
+</div>
+
+		<h1>Offline map service</h1>
+
+<h2>Introduction</h2>
+
+<p>Nutiteq provides service to download base map packages in special vector format for offline use. There is no direct URL to get these packages, instead we provide cross-platform API from within SDK: <strong>Package Manager API</strong>. Application should use this API to download packages. The API provides following features:</p>
+
+<ul>
+<li>Listing of available packages (countries), get IDs and metadata of specific packages</li>
+<li>Start package download</li>
+<li>Pause and resume download</li>
+<li>Delete downloaded package</li>
+<li>Get status report of package state and download status (% downloaded)</li>
+</ul>
+
+<p>Usage of API requires registration of license code.</p>
+
+<h3>Typical scenarios</h3>
+
+<p><img src = "http://share.gifyoutube.com/yaNw0r.gif" alt="Offline browser" align="right"></p>
+
+<p>Currently we support following scenarios:</p>
+
+<ol>
+<li>Provide <strong>interactive list of all packages</strong> to the user, who selects a country and downloads predefined map package. From app development point of view this is most complex, as you need to create nice UX. See advancedmap sample for it</li>
+<li>You define <strong>one specific country</strong> what user wants to download. Your application provides UI button to start download; or even starts download automatically when user first starts your app. This is much simpler to implement, as there is no need for list and status handling. See below for example code for it.</li>
+<li>Download <strong>bounding box</strong> map area. This is suitable for e.g. city guide apps where whole country is not needed. You can even let user to define own area of interest. See below example code for it.</li>
+</ol>
+
+<h3>Available packages</h3>
+
+<ul>
+<li><a href="packages.html">List of available packages</a> - see available package ID-s for country package downloads</li>
+</ul>
+
+<h2>Usage</h2>
+
+<h3>Example code - complex scenario</h3>
+
+<p>We provide ready-made <em>advancedmap</em> examples: <a href="https://github.com/nutiteq/hellomap3d-android/blob/master/com.nutiteq.advancedmap3/src/com/nutiteq/advancedmap3/PackageManagerActivity.java"><strong>PackageManagerActivity</strong></a> for Android, and <a href="https://github.com/nutiteq/hellomap3d-ios/blob/master/advancedmap3/advancedmap3/PackageManagerController.mm"><strong>PackageMapController</strong></a> for iOS. These cover the more complex case - listing of all packages, and user can select one or many of them, and view the map.</p>
+
+<h3>Event diagram</h3>
+
+<p>Following flow diagram displays key events and messages between app, Package Manager and online service.</p>
+
+<p><img src="../images/pm_flow.png.html" alt="packagemanager flow"></p>
+
+<h3>Additional events</h3>
+
+<p>Application must handle properly following possible additional asynchronous events:</p>
+
+<ul>
+<li><em>onPackageFailed</em> - package download failed, e.g. network connection issue</li>
+<li><em>onPackageCancelled</em> - download canceled by application</li>
+<li><em>onPackageListFailed</em> - package list download failed, probably network issue</li>
+</ul>
+
+<h3>Steps for single package download</h3>
+
+<p>Following are steps to implement <strong>single map package</strong> downloading</p>
+
+<ul>
+<li><strong>Initialize NutiteqPackageManager</strong></li>
+</ul>
+
+<div id="tabs1">
+  <ul>
+    <li><a href="offline-maps.html#i1"><span>iOS ObjC</span></a></li>
+    <li><a href="offline-maps.html#a1"><span>Android Java</span></a></li>
+    <li><a href="offline-maps.html#n1"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i1">
+<pre class="brush: objc">
+    // Register license, this must be done before PackageManager can be used!
+    [NTMapView registerLicense:"YOUR_LICENSE_HERE"];
+
+    // Create folder for package manager files. Package manager needs persistent writable folder.
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask,YES);
+    NSString* appSupportDir = [paths objectAtIndex: 0];
+    NSString* packagesDir = [appSupportDir stringByAppendingString:@"packages"];
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:packagesDir withIntermediateDirectories:NO attributes:nil error:&error];
+
+    // Create package manager and package manager listener
+    // we had defined packageManager and packageManagerListener already, as properties
+    // currently the only package data source is nutiteq.mbstreets, it has OpenStreetMap global data
+    _packageManager = [[NTNutiteqPackageManager alloc] initWithSource:@"nutiteq.mbstreets" dataFolder:packagesDir];
+    [_packageManager start];
+</pre>
+</div>
+
+<div id="a1">
+<pre class="brush: java">
+ // Register license, this must be done before PackageManager can be used!
+ MapView.registerLicense("YOUR_LICENSE_HERE", getApplicationContext());
+        
+ // Create package manager
+ File packageFolder = new File(getApplicationContext().getExternalFilesDir(null), "mappackages");
+ if (!(packageFolder.mkdirs() || packageFolder.isDirectory())) {
+    Log.e(Const.LOG_TAG, "Could not create package folder!");
+ }
+ packageManager = new NutiteqPackageManager("nutiteq.mbstreets", packageFolder.getAbsolutePath());
+ packageManager.start();
+
+</pre>
+</div>
+
+<div id="n1">
+<pre class="brush: csharp">
+ // 1) Android ONLY: Register license, this must be done before PackageManager can be used!
+ MapView.RegisterLicense("YOUR-NUTITEQ-LICENSE", ApplicationContext);
+ 
+ // Create/find folder for packages
+ var packageFolder = new File (GetExternalFilesDir(null), "packages");
+ if (!(packageFolder.Mkdirs() || packageFolder.IsDirectory)) {
+   Log.Fatal("Could not create package folder!");
+ }
+
+
+ // 2) iOS ONLY: Register license, this must be done before PackageManager can be used!
+ MapView.RegisterLicense("YOUR-NUTITEQ-LICENSE");
+
+ // Find folder for packages
+ var paths = NSSearchPath.GetDirectories (NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomain.User);
+ var packageFolder = paths [0] + "packages";
+ NSFileManager.DefaultManager.CreateDirectory (packageFolder, true, null);
+
+// Following code is identical for all platforms        
+
+// Create package manager
+
+// define PackageManager listener, definition is in same class above
+var packageManager = new NutiteqPackageManager("nutiteq.mbstreets", packageFolder);
+packageManager.PackageManagerListener = new PackageListener(packageManager);
+
+// Download new package list only if it is older than 24h
+// Note: this is only needed if pre-made packages are used
+if (packageManager.ServerPackageListAge > 24 * 60 * 60) {
+  packageManager.StartPackageListDownload ();
+}
+
+// Start manager - mandatory
+packageManager.Start ();
+
+</pre>
+</div>
+
+<p></div></p>
+
+<ul>
+<li><strong>Implement and set PackageManagerListener</strong> </li>
+</ul>
+
+<div id="tabs2">
+  <ul>
+    <li><a href="offline-maps.html#i2"><span>iOS ObjC</span></a></li>
+    <li><a href="offline-maps.html#a2"><span>Android Java</span></a></li>
+    <li><a href="offline-maps.html#n2"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i2">
+<pre class="brush: objc">
+
+    // 1. define own listener object
+    
+/*
+ * Package manager listener. Listener is notified about asynchronous events
+ * about packages.
+ */
+@interface PackageManagerListener : NTPackageManagerListener
+
+- (void)onPackageListUpdated;
+- (void)onPackageListFailed;
+- (void)onPackageUpdated:(NSString*)packageId version:(int)version;
+- (void)onPackageCancelled:(NSString*)packageId version:(int)version;
+- (void)onPackageFailed:(NSString*)packageId version:(int)version errorType:(NTPackageErrorType)errorType;
+- (void)onPackageStatusChanged:(NSString*)packageId version:(int)version status:(NTPackageStatus*)status;
+
+@property(readonly, atomic) NSHashTable* packageManagerControllers;
+
+@end
+
+
+    // 2. create listener implementation
+    
+    
+@implementation PackageManagerListener
+
+
+- (void)onPackageListUpdated
+{
+  // called when package list is downloaded
+  // now you can start downloading packages
+ 
+}
+
+- (void)onPackageListFailed
+{
+  // called when package list download is failed (network connection)
+}
+
+- (void)onPackageUpdated:(NSString*)packageId version:(int)version
+{
+  // called when package is updated
+}
+
+- (void)onPackageCancelled:(NSString*)packageId version:(int)version
+{
+  // called when you called cancel package download
+}
+
+- (void)onPackageFailed:(NSString*)packageId version:(int)version errorType:(NTPackageErrorType)errorType
+{
+ // error in package download
+}
+
+- (void)onPackageStatusChanged:(NSString*)packageId version:(int)version status:(NTPackageStatus*)status
+{
+  // a portion of package is downloaded. Update your progress bar here.
+}
+
+@end
+
+    // following to your Controller class:
+
+    // 3. create listener object instance
+    _packageManagerListener = [[PackageManagerListener alloc] init];
+
+    // 4. Register this controller with listener to receive notifications about events
+    [_packageManagerListener addPackageManagerController:self];
+
+    // 5. Attach package manager listener
+    [_packageManager setPackageManagerListener:_packageManagerListener];
+</pre>
+</div>
+
+<div id="a2">
+<pre class="brush: java">
+   packageManager.setPackageManagerListener(new PackageListener());
+   packageManager.startPackageListDownload();
+   
+   
+   // PackageListener.java :
+    /**
+     * Listener for package manager events.
+     */
+    class PackageListener extends PackageManagerListener {
+        @Override
+        public void onPackageListUpdated() {
+          // called when package list is downloaded
+          // now you can start downloading packages
+        }
+
+        @Override
+        public void onPackageListFailed() {
+          // Failed to download package list
+        }
+
+        @Override
+        public void onPackageStatusChanged(String id, int version, PackageStatus status) {
+          // a portion of package is downloaded. Update your progress bar here.
+        }
+
+        @Override
+        public void onPackageCancelled(String id, int version) {
+          // called when you called cancel package download
+        }
+
+        @Override
+        public void onPackageUpdated(String id, int version) {
+          // called when package is updated
+        }
+
+        @Override
+        public void onPackageFailed(String id, int version, PackageErrorType errorType) {
+          // Failed to download package " + id + "/" + version
+        }
+    }
+</pre>
+</div>
+
+<div id="n2">
+<pre class="brush: csharp">
+
+// to your main class:
+packageManager.PackageManagerListener = new PackageListener(packageManager);
+if (packageManager.ServerPackageListAge > 24 * 60 * 60) {
+        packageManager.StartPackageListDownload ();
+}
+
+// PackageListener.cs:
+
+using Nutiteq.PackageManager;
+using Nutiteq.Utils;
+
+namespace HelloMap
+{
+
+    public class PackageListener : PackageManagerListener
+    {
+        private PackageManager _packageManager;
+
+        public PackageListener (PackageManager packageManager)
+        {
+            _packageManager = packageManager;
+        }
+
+        public override void OnPackageListUpdated ()
+        {
+            // called when package list is downloaded
+            // now you can start downloading packages
+            Log.Debug ("OnPackageListUpdated");
+
+            // to make sure that package list is updated, full package download is called here
+            if (_packageManager.GetLocalPackage ("EE") == null) {
+                _packageManager.StartPackageDownload ("EE");
+            }
+             
+        }
+
+        public override void OnPackageListFailed ()
+        {
+            Log.Debug ("OnPackageListFailed");
+            // Failed to download package list
+        }
+
+        public override void OnPackageStatusChanged (string id, int version, PackageStatus status)
+        {
+            // a portion of package is downloaded. Update your progress bar here.
+            // Notice that the view and SDK are in different threads, so data copy id needed
+            Log.Debug ("OnPackageStatusChanged " + id + " ver " + version + " progress " + status.Progress);
+        }
+
+        public override void OnPackageCancelled (string id, int version)
+        {
+            // called when you called cancel package download
+            Log.Debug ("OnPackageCancelled");
+        }
+
+        public override void OnPackageUpdated (string id, int version)
+        {
+            // called when package is updated
+            Log.Debug ("OnPackageUpdated");
+        }
+
+        public override void OnPackageFailed (string id, int version, PackageErrorType errorType)
+        {
+            // Failed to download package " + id + "/" + version
+            Log.Debug ("OnPackageFailed: " + errorType);
+        }
+    }
+}
+
+</pre>
+</div>
+
+<p></div></p>
+
+<ul>
+<li> <strong>Download of country package</strong></li>
+</ul>
+
+<p>Following starts download of map of Estonia. See <a href="packages.html">list of available packages</a> for available countries. Generally packages are for ISO 2-letter administrative country codes, with two exceptions:</p>
+
+<ul>
+<li>Some bigger countries: USA, Canada, Russia, Germany and France have one level  subdivision </li>
+<li>Some countries (UK, Spain) have are both options: whole country, and subdivisions</li>
+</ul>
+
+<div id="tabs3">
+  <ul>
+    <li><a href="offline-maps.html#i3"><span>iOS ObjC</span></a></li>
+    <li><a href="offline-maps.html#a3"><span>Android Java</span></a></li>
+    <li><a href="offline-maps.html#n3"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i3">
+<pre class="brush: objc">
+- (void)onPackageListUpdated
+{
+  // called when package list is downloaded
+  // now you can start downloading packages
+ [_packageManager startPackageDownload:@"EE"];
+}
+</pre>
+</div>
+
+<div id="a3">
+<pre class="brush: java">
+@Override
+public void onPackageListUpdated() {
+  // called when package list is downloaded
+  // now you can start downloading packages
+  packageManager.startPackageDownload("EE");
+}
+</pre>
+</div>
+
+<div id="n3">
+<pre class="brush: csharp">
+public override void OnPackageListUpdated ()
+{
+    // called when package list is downloaded
+    // now you can start downloading packages
+    Log.Debug ("OnPackageListUpdated");
+
+    // to make sure that package list is updated, full package download is called here
+    if (_packageManager.GetLocalPackage ("EE") == null) {
+        _packageManager.StartPackageDownload ("EE");
+    }
+ 
+}
+</pre>
+</div>
+
+<p></div></p>
+
+<ul>
+<li> <strong>Download of bounding box</strong></li>
+</ul>
+
+<p>If you do not need whole country, then you can define smaller area with bounding box. There is limitation of 5000 map tiles per download, depending on latitude it means about 150x150 km area. </p>
+
+<p>Bouding box is defined in format <strong>bbox(lonMin,latMin,lonMax,latMax)</strong>. You can use nice 3rd party <a href="http://boundingbox.klokantech.com/">BoundingBox</a> web service to define  areas; use CSV format there to get appropriate format for coordinates.</p>
+
+<p>This download does not require PackageList download, so you can start it right away when PackageManger is created.</p>
+
+<div id="tabs5">
+  <ul>
+    <li><a href="offline-maps.html#i5"><span>iOS ObjC</span></a></li>
+    <li><a href="offline-maps.html#a5"><span>Android Java</span></a></li>
+    <li><a href="offline-maps.html#n5"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i5">
+<pre class="brush: objc">
+  // get London greater area, near maximum area package size
+ [_packageManager startPackageDownload:@"bbox(-0.8164,51.2383,0.6406,51.7402)"];
+
+</pre>
+</div>
+
+<div id="a5">
+<pre class="brush: java">
+
+
+// London (about 30MB)
+String bbox = "bbox(-0.8164,51.2382,0.6406,51.7401)"; 
+if (packageManager.getLocalPackage(bbox) == null) {
+    packageManager.startPackageDownload (bbox);
+}
+</pre>
+</div>
+
+<div id="n5">
+<pre class="brush: csharp">
+
+// London (about 30MB)
+var bbox = "bbox(-0.8164,51.2382,0.6406,51.7401)"; 
+if (packageManager.GetLocalPackage(bbox) == null) {
+    packageManager.StartPackageDownload (bbox);
+}
+</pre>
+</div>
+
+<p></div></p>
+
+<ul>
+<li><strong>Add datasource with offline map</strong></li>
+</ul>
+
+<p>There is special Vector Tile Data Source: <strong>PackageManagerTileDataSource</strong> which needs to be used.</p>
+
+<div id="tabs4">
+  <ul>
+    <li><a href="offline-maps.html#i4"><span>iOS ObjC</span></a></li>
+    <li><a href="offline-maps.html#a4"><span>Android Java</span></a></li>
+    <li><a href="offline-maps.html#n4"><span>.NET C#</span></a></li>
+  </ul>
+<div id="i4">
+<pre class="brush: objc">
+    // Load vector tile styleset
+    NSString* styleAssetName = @"osmbright.zip";
+
+    NTUnsignedCharVector *vectorTileStyleSetData = [NTAssetUtils LoadBytes:styleAssetName];
+    NTMBVectorTileStyleSet *vectorTileStyleSet = [[NTMBVectorTileStyleSet alloc] initWithData:vectorTileStyleSetData];
+
+    // Create vector tile decoder using the styleset and update style parameters
+    NTMBVectorTileDecoder* vectorTileDecoder = [[NTMBVectorTileDecoder alloc] initWithStyleSet:vectorTileStyleSet];
+    [vectorTileDecoder setStyleStringParameter:@"lang" value:@"en"];
+    
+    // Optional: enable 3D elements
+    [self.vectorTileDecoder setStyleBoolParameter:@"buildings3d" value:YES];
+    [self.vectorTileDecoder setStyleStringParameter:@"markers3d" value:@"1"];
+        
+    // Create tile data source from PackageManager
+    NTTileDataSource* vectorTileDataSource = [[NTPackageManagerTileDataSource alloc] initWithPackageManager:_packageManager];
+    
+    // Create vector tile layer, using previously created data source and decoder
+    NTVectorTileLayer* baseLayer = [[NTVectorTileLayer alloc] initWithDataSource:vectorTileDataSource decoder:self.vectorTileDecoder];
+
+    // Add vector tile layer as first layer
+    [[self getLayers] insert:0 layer:baseLayer];
+</pre>
+</div>
+
+<div id="a4">
+<pre class="brush: java">
+ // Create layer with vector styling
+UnsignedCharVector styleBytes = AssetUtils.loadBytes("osmbright.zip");
+MBVectorTileDecoder vectorTileDecoder = null;
+if (styleBytes != null){
+
+// Create style set
+  MBVectorTileStyleSet vectorTileStyleSet = new MBVectorTileStyleSet(styleBytes);
+  vectorTileDecoder = new MBVectorTileDecoder(vectorTileStyleSet);
+}
+
+// create offline datasource from Package Manager
+PackageManagerTileDataSource dataSource = new PackageManagerTileDataSource(packageManager);
+       
+VectorTileLayer baseLayer = new VectorTileLayer(vectorTileDataSource, vectorTileDecoder);
+ 
+mapView.getLayers().add(baseLayer);
+</pre>
+</div>
+
+<div id="n4">
+<pre class="brush: csharp">
+// define styling for vector map
+UnsignedCharVector styleBytes = AssetUtils.LoadBytes("osmbright.zip");
+MBVectorTileDecoder vectorTileDecoder = null;
+if (styleBytes != null) {
+    // Create style set
+    MBVectorTileStyleSet vectorTileStyleSet = new MBVectorTileStyleSet (styleBytes);
+    vectorTileDecoder = new MBVectorTileDecoder (vectorTileStyleSet);
+} else {
+    Log.Error ("Failed to load style data");
+}
+
+var baseLayer = new VectorTileLayer(new PackageManagerTileDataSource(packageManager),vectorTileDecoder);
+mapView.Layers.Add(baseLayer);
+</pre>
+</div>
+
+<p></div></p>
+
+<script>
+        $( "#tabs1" ).tabs();
+        $( "#tabs2" ).tabs();
+        $( "#tabs3" ).tabs();
+        $( "#tabs4" ).tabs();
+        $( "#tabs5" ).tabs();
+</script>
+
+<h3>Updating packages</h3>
+
+<p>There is no special event or method to check package updates, so updates can be checked and controlled by application using following logic. You can call this logic as soon as you feel appropriate. Nutiteq Maps service has OSM offline package updates approximately once a month, different packages can be updated in different point of time, and with different frequency.</p>
+
+<ol>
+<li>Use packagemanager <em>startPackageListDownload</em> to get server packages</li>
+<li>Wait for listener&#39;s <em>onPackageListUpdated</em> event, now server packages were downloaded</li>
+<li>Use packageManager <em>getLocalPackages</em> to get already downloaded packages (local packages)</li>
+<li>Iterate list of local packages, check from metadata if server package list has newer version of some</li>
+<li>If there is newer version, then this package is updated</li>
+<li>Updated package download is like normal first download</li>
+</ol>
+
+<p>During re-download of same package application shows old map until download is complete. So the update can run in background safely.</p>
+
+<h3>Additional notes</h3>
+
+<ul>
+<li><p><em>startPackageListDownload</em> method does not need to be called every time when package list is required. In fact, once package list is successfully downloaded, it will remain locally available. But refreshing the contents once a day or perhaps once a week is recommended as some older packages may become available once newer versions are uploaded. <em>getServerPackageListAge</em> method can be used to check the age of the package list data.</p></li>
+<li><p>Package manager keeps persistent task queue of all submitted requests. Even when it is stopped, downloads will automatically resume when it is started next time.</p></li>
+<li><p>It is possible to pause downloads by setting task priority to -1. Downloads will resume once priority is set to non-negative number.</p></li>
+<li><p><em>PackageInfo</em> class provides two methods for human-readable package names: <em>getName</em> and <em>getNames</em>. <em>getNames</em> takes language argument and will return localized name of the package (assuming the language is supported, currently only major languages such as English, German, French are supported). <em>getNames</em> returns list of names, as some packages can be placed under multiple categories. So, using <em>getNames</em> should be preferred over <em>getName</em>.</p></li>
+<li><p>Each package includes <strong>tile mask</strong>. Tile mask basically lists all tiles of the package up to a certain zoom level (currently 10). Tile mask can be used to quickly find a package corresponding to given tile coordinates or to find a package containing given tile.</p></li>
+</ul>
+
+    </div>
+   </div>
+</section>
+            
+            
+          </div>
+        </div>
+      
+    </main>    
+    
+    <footer class="b-footer">
+		<p>&copy; 2018 CartoDB Estonia OÜ | <a href="../termsofservice.html">Terms of Service</a> | <a href="../privacypolicy.html">Privacy Policy</a> | <a href="../refundpolicy.html">Refund Policy</a></p>
+	</footer>
+
+    <!-- JS and analytics only. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <a title="Real Time Analytics" href="http://clicky.com/100810539"><img alt="Real Time Analytics" src="http://static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100810539); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/100810539ns.gif" /></p></noscript>
+
+    <script src="../javascripts/init.js"></script>
+	<script type="text/javascript">
+    	 SyntaxHighlighter.all()
+         SyntaxHighlighter.defaults['toolbar'] = false;
+         SyntaxHighlighter.defaults['gutter'] = false;
+	</script>
+  </body>
+</html>
